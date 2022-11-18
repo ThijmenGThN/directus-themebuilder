@@ -12,7 +12,28 @@ function shade(color: string, percent: number) {
 
 export default function Index() {
   const [hex, setHex] = useState('#6644FF')
-  const [content, setContent] = useState('')
+  const [content, setContent] = useState(`
+#app, #main-content, body {
+  --primary-alt: #F0ECFF !important;
+  --primary-10: #F0ECFF !important;
+  --primary-25: #D9D0FF !important;
+  --primary-50: #B3A1FF !important;
+  --primary-75: #8C73FF !important;
+  --primary-90: #7557FF !important;
+
+  --primary: #6644FF !important;
+
+  --primary-110: #5E41EC !important;
+  --primary-125: #523DCF !important;
+  --primary-150: #3E369F !important;
+  --primary-175: #2B3070 !important;
+  --primary-190: #1F2C53 !important;
+
+  --v-button-background-color: #6644FF !important;
+  --v-button-background-color-hover: #5E41EC !important;
+  --sidebar-detail-color-active: #5E41EC !important;
+}
+  `.trim())
 
   const convCSS = () =>
     setContent(`
@@ -38,7 +59,8 @@ export default function Index() {
 }
     `.trim())
 
-  useEffect(() => { !hex.startsWith('#') && setHex('#' + hex); convCSS }, [hex])
+  useEffect(() => { !hex.startsWith('#') && setHex('#' + hex) }, [hex])
+  useEffect(() => convCSS, [hex])
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -55,7 +77,7 @@ export default function Index() {
 
         <div className='mt-10 flex flex-col gap-2'>
           <p className='font-semibold'>Custom CSS</p>
-          <div className='flex min-h-[500px] relative rounded border-2 border-neutral-300 hover:border-violet-500 hover:border-3'>
+          <div className='flex min-h-[502px] relative rounded border-2 border-neutral-300 hover:border-violet-500 hover:border-3'>
             <div className='bg-slate-100 w-14 border-r-2'></div>
             <textarea readOnly className='w-full font-semibold outline-0 resize-none p-2 text-violet-500' value={content} />
             <button onClick={() => navigator.clipboard.writeText(content)} className='absolute top-4 right-4 bg-slate-100 p-3 rounded m-1.5 border-2 hover:bg-slate-200'>
