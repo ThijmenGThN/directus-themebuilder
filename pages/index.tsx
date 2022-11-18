@@ -35,7 +35,9 @@ export default function Index() {
 }
   `.trim())
 
-  const convCSS = () =>
+  useEffect(() => {
+    !hex.startsWith('#') && setHex('#' + hex)
+
     setContent(`
 #app, #main-content, body {
   --primary-alt: ${shade(hex, 0.90)} !important;
@@ -58,9 +60,7 @@ export default function Index() {
   --sidebar-detail-color-active: ${shade(hex, -0.90)} !important;
 }
     `.trim())
-
-  useEffect(() => { !hex.startsWith('#') && setHex('#' + hex) }, [hex])
-  useEffect(() => convCSS, [hex])
+  }, [hex])
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -72,7 +72,7 @@ export default function Index() {
 
         <div className='mt-10 flex flex-col gap-2'>
           <p className='font-semibold'>Hex Color</p>
-          <input placeholder='#6644FF' value={hex} onChange={({ target }) => setHex(target.value)} className="p-4 font-semibold border-2 outline-0 border-neutral-300 rounded-lg w-full hover:border-violet-500 hover:border-3" />
+          <input placeholder='#6644FF' value={hex} onChange={({ target }) => { setHex(target.value.trim()) }} className="p-4 font-semibold border-2 outline-0 border-neutral-300 rounded-lg w-full hover:border-violet-500 hover:border-3" />
         </div>
 
         <div className='mt-10 flex flex-col gap-2'>
