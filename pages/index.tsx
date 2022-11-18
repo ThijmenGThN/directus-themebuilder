@@ -79,7 +79,7 @@ export default function Index() {
           <a className='px-4 py-6 text-xl hover:cursor-pointer' rel="noreferrer" target="_blank" href="https://paypal.me/ThijmenGThN">
             <RiPaypalFill />
           </a>
-          <a className='px-4 py-6 text-xl hover:cursor-pointer' rel="noreferrer" target="_blank" href="https://paypal.me/ThijmenGThN">
+          <a className='px-4 py-6 text-xl hover:cursor-pointer' rel="noreferrer" target="_blank" href="https://github.com/ThijmenGThN/directus-themebuilder">
             <RiGitRepositoryFill />
           </a>
         </div>
