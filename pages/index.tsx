@@ -38,8 +38,7 @@ export default function Index() {
 }
     `.trim())
 
-  useEffect(() => { !hex.startsWith('#') && setHex('#' + hex) }, [hex])
-  useEffect(() => convCSS)
+  useEffect(() => { !hex.startsWith('#') && setHex('#' + hex); convCSS }, [hex])
 
   return (
     <div className='flex flex-col min-h-screen'>
