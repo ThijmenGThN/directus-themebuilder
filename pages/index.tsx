@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { BiCopy, BiCopyright } from 'react-icons/bi'
+import { FaCheck } from 'react-icons/fa'
 import { RiPaypalFill, RiGitRepositoryFill } from 'react-icons/ri'
 
 import Banner from "/public/favicon.ico"
@@ -11,6 +12,7 @@ function shade(color: string, percent: number) {
 }
 
 export default function Index() {
+  const [copied, setCopied] = useState(false)
   const [hex, setHex] = useState('#6644FF')
   const [content, setContent] = useState(`
 #app, #main-content, body {
@@ -80,9 +82,17 @@ export default function Index() {
           <div className='flex min-h-[502px] relative rounded border-2 border-neutral-300 hover:border-violet-500 hover:border-3'>
             <div className='bg-slate-100 w-14 border-r-2'></div>
             <textarea readOnly className='w-full font-semibold outline-0 resize-none p-2 text-violet-500' value={content} />
-            <button onClick={() => navigator.clipboard.writeText(content)} className='absolute top-4 right-4 bg-slate-100 p-3 rounded m-1.5 border-2 hover:bg-slate-200'>
-              <BiCopy />
-            </button>
+            {
+              copied ? (
+                <button className='absolute top-4 right-4 bg-violet-100 p-3 rounded m-1.5 border-2 text-violet-500 border-violet-500'>
+                  <FaCheck />
+                </button>
+              ) : (
+                <button onClick={() => { navigator.clipboard.writeText(content); setCopied(true); setTimeout(() => setCopied(false), 2500) }} className='absolute top-4 right-4 bg-slate-100 p-3 rounded m-1.5 border-2 hover:bg-slate-200'>
+                  <BiCopy />
+                </button>
+              )
+            }
           </div>
         </div>
       </div>
