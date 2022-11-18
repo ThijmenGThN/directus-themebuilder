@@ -3,8 +3,6 @@
 
 ### A Theme Builder for Directus
 
-> Hey all,
->
 > #### Motive
 > When I am customizing the directus app with a color, I'm having the issue of going through all the steps of converting a single color to the css object, as a solution I use the site: https://mdigi.tools/darken-color and their lighten option, this works well but is a bit tedious to do.
 >
