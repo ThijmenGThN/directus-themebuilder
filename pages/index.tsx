@@ -14,28 +14,7 @@ function shade(color: string, percent: number) {
 export default function Index() {
   const [copied, setCopied] = useState(false)
   const [hex, setHex] = useState('#6644FF')
-  const [content, setContent] = useState(`
-#app, #main-content, body {
-  --primary-alt: #F0ECFF !important;
-  --primary-10: #F0ECFF !important;
-  --primary-25: #D9D0FF !important;
-  --primary-50: #B3A1FF !important;
-  --primary-75: #8C73FF !important;
-  --primary-90: #7557FF !important;
-
-  --primary: #6644FF !important;
-
-  --primary-110: #5E41EC !important;
-  --primary-125: #523DCF !important;
-  --primary-150: #3E369F !important;
-  --primary-175: #2B3070 !important;
-  --primary-190: #1F2C53 !important;
-
-  --v-button-background-color: #6644FF !important;
-  --v-button-background-color-hover: #5E41EC !important;
-  --sidebar-detail-color-active: #5E41EC !important;
-}
-  `.trim())
+  const [content, setContent] = useState('')
 
   useEffect(() => {
     !hex.startsWith('#') && setHex('#' + hex)
