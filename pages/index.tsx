@@ -51,15 +51,15 @@ export default function Index() {
 
   --primary: ${shade(hex, 0)} !important;
 
-  --primary-110: ${shade(hex, -0.90)} !important;
-  --primary-125: ${shade(hex, -0.75)} !important;
+  --primary-110: ${shade(hex, -0.10)} !important;
+  --primary-125: ${shade(hex, -0.25)} !important;
   --primary-150: ${shade(hex, -0.50)} !important;
-  --primary-175: ${shade(hex, -0.25)} !important;
-  --primary-190: ${shade(hex, -0.10)} !important;
+  --primary-175: ${shade(hex, -0.75)} !important;
+  --primary-190: ${shade(hex, -0.90)} !important;
 
   --v-button-background-color: ${shade(hex, 0)} !important;
-  --v-button-background-color-hover: ${shade(hex, -0.90)} !important;
-  --sidebar-detail-color-active: ${shade(hex, -0.90)} !important;
+  --v-button-background-color-hover: ${shade(hex, -0.10)} !important;
+  --sidebar-detail-color-active: ${shade(hex, -0.10)} !important;
 }
     `.trim())
   }, [hex])
