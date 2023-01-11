@@ -1,12 +1,16 @@
 {
     "files.exclude": {
-        "node_modules": true,
+        "tsconfig.tsbuildinfo": true,
+        "postcss.config.js": true,
+        "docker-compose.yml": true,
         ".eslintrc.json": true,
         "next.config.js": true,
-        "yarn.lock": true,
-        "postcss.config.js": true,
         "tsconfig.json": true,
         "next-env.d.ts": true,
-        ".next": true
+        "node_modules": true,
+        "yarn.lock": true,
+        "**/.keep": true,
+        ".next": true,
+        "data": true
     }
 }

@@ -1,10 +1,14 @@
 import Head from 'next/head'
+import getConfig from 'next/config'
+import { Directus } from '@directus/sdk'
 
-import type { AppProps } from 'next/app'
+import '@/styles/globals.css'
 
-import '/source/styles/globals.css'
+const { publicRuntimeConfig: config } = getConfig()
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: any) {
+
+  pageProps.API = new Directus(config.CORS_ENDPOINT ? config.CORS_ENDPOINT : 'http://localhost:8055')
 
   return (
     <>
