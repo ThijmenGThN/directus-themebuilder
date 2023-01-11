@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { BiCopy, BiCopyright } from 'react-icons/bi'
+import { BiCopy, BiCopyright, BiLike } from 'react-icons/bi'
 import { FaCheck } from 'react-icons/fa'
 import { RiPaypalFill, RiGitRepositoryFill } from 'react-icons/ri'
+import { SketchPicker } from 'react-color'
 
 import Banner from "/public/favicon.ico"
 
@@ -15,9 +16,21 @@ export default function Index() {
   const [copied, setCopied] = useState(false)
   const [hex, setHex] = useState('#6644FF')
   const [content, setContent] = useState('')
+  const [liked, setLiked] = useState<boolean>(false)
+  const [showPicker, setShowPicker] = useState<boolean>(false)
+  const [likes, setLikes] = useState<number>(0)
+
+  const like = () => {
+    if (liked) return
+    window.localStorage.setItem('liked', "true")
+    setLiked(true)
+    setLikes(likes + 1)
+  }
 
   useEffect(() => {
     !hex.startsWith('#') && setHex('#' + hex)
+
+    if (window.localStorage.getItem('liked')) setLiked(true)
 
     setContent(`
 #app, #main-content, body {
@@ -49,18 +62,36 @@ export default function Index() {
         <div className="flex flex-col gap-3 mt-8 items-center font-bold">
           <Image src={Banner} className="w-24" alt="Directus" />
           Theme Builder
+          <p className='text-sm italic text-neutral-400 font-mono'>Transform Directus with a splash of color<br />- made simple for you</p>
         </div>
 
         <div className='mt-10 flex flex-col gap-2'>
-          <p className='font-semibold'>Hex Color</p>
-          <input placeholder='#6644FF' value={hex} onChange={({ target }) => { setHex(target.value.trim()) }} className="p-4 font-semibold border-2 outline-0 border-neutral-300 rounded-lg w-full hover:border-violet-500 hover:border-3" />
+          <p className='font-semibold'>
+            Hex Color
+          </p>
+
+          <div className='flex gap-2'>
+            <div onClick={() => setShowPicker(true)} className='border-neutral-300 border-2 rounded-lg relative hover:cursor-pointer hover:border-violet-500 hover:border-3'>
+              {showPicker && (
+                <SketchPicker className="absolute z-10" color={hex} onChangeComplete={(color: any) => { setHex(color.hex); setShowPicker(false) }} />
+              )}
+              <div className='m-3 w-9 h-9 rounded' style={{ backgroundColor: hex }} />
+            </div>
+
+            <input placeholder='#6644FF' value={hex} onChange={({ target }) => { setHex(target.value.trim()) }} className="p-4 font-semibold border-2 outline-0 border-neutral-300 rounded-lg w-full hover:border-violet-500 hover:border-3" />
+
+            {/* <div onClick={like} className={liked ? 'rounded-lg px-6 py-4 bg-violet-500 text-white flex gap-3 text-xl' : 'border-neutral-300 border-2 rounded-lg flex gap-3 text-xl px-6 py-4 hover:cursor-pointer hover:border-violet-500 hover:border-3'}>
+              <BiLike className='mt-1' />
+              <p>{likes}</p>
+            </div> */}
+          </div>
         </div>
 
         <div className='mt-10 flex flex-col gap-2'>
           <p className='font-semibold'>Custom CSS</p>
           <div className='flex min-h-[502px] relative rounded border-2 border-neutral-300 hover:border-violet-500 hover:border-3'>
             <div className='bg-slate-100 w-14 border-r-2'></div>
-            <textarea readOnly className='w-full font-semibold outline-0 resize-none p-2 text-violet-500' value={content} />
+            <textarea readOnly className='w-full font-semibold outline-0 resize-none p-2' style={{ color: hex }} value={content} />
             {
               copied ? (
                 <button className='absolute top-4 right-4 bg-violet-100 p-3 rounded m-1.5 border-2 text-violet-500 border-violet-500'>

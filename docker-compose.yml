@@ -45,6 +45,7 @@ services:
     env_file: .env
     environment:
       POSTGRES_PASSWORD: $SECRET
+      RATE_LIMITER_ENABLED: true
     volumes: [./data/database:/var/lib/postgresql/data]
 
 networks:
