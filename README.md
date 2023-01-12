@@ -8,6 +8,6 @@
 > 
 > _**TLDR**: Easier way to apply a custom color with a webapp color converter._
 
-> https://themebuilder.thijmenheuvelink.nl/
+> https://heuve.link/directus-themebuilder
 
 ![Preview](http://heuve.link/themebuilder-preview)
