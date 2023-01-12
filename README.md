@@ -1,6 +1,4 @@
 
-![Preview](http://heuve.link/themebuilder-preview)
-
 ### A Theme Builder for Directus
 
 > #### Motive
@@ -11,3 +9,5 @@
 > _**TLDR**: Easier way to apply a custom color with a webapp color converter._
 
 > https://themebuilder.thijmenheuvelink.nl/
+
+![Preview](http://heuve.link/themebuilder-preview)
