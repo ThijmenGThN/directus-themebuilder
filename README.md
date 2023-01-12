@@ -1,5 +1,5 @@
 
-![Preview](https://i.imgur.com/xUqSnkA.png)
+![Preview](http://heuve.link/themebuilder-preview)
 
 ### A Theme Builder for Directus
 
