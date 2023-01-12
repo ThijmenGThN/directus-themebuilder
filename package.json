@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "tsc --noemit && next lint",
     "test": "./node_modules/.bin/cypress open --project source/tests",
-    "ci": "yarn && yarn build && yarn start"
+    "ci": "apk add git && yarn && yarn build && yarn start"
   },
   "dependencies": {
     "next": "13.0.3",
