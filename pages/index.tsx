@@ -66,7 +66,7 @@ export default function Index({ API, buildId }: { API: any, buildId: string }) {
   --sidebar-detail-color-active: ${shade(hex, -0.10)} !important;
 }
     `.trim())
-  }, [hex])
+  }, [hex, API._url])
 
   return (
     <div className='flex flex-col min-h-screen'>
