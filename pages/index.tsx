@@ -1,30 +1,25 @@
 import { execSync } from 'child_process'
 import { useEffect, useState } from 'react'
-import { BiCopy, BiCopyright, BiLike } from 'react-icons/bi'
+import { BiCopy, BiCopyright, BiHeart, BiStar } from 'react-icons/bi'
 import { FaCheck } from 'react-icons/fa'
 import { RiPaypalFill, RiGitRepositoryFill } from 'react-icons/ri'
 import { SketchPicker } from 'react-color'
+import Image from 'next/image'
 
 function shade(color: string, percent: number) {
   var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
   return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
 
-export default function Index({ API, buildId }: { API: any, buildId: string }) {
-  const [copied, setCopied] = useState(false)
+export default function Index({ buildId, latestTag }: { buildId: string, latestTag: string }) {
   const [hex, setHex] = useState('#6644FF')
   const [content, setContent] = useState('')
-  const [liked, setLiked] = useState<boolean>(false)
-  const [showPicker, setShowPicker] = useState<boolean>(false)
-  const [likes, setLikes] = useState<number>(0)
 
-  const like = async () => {
-    if (liked) return
-    window.localStorage.setItem('liked', "true")
-    setLiked(true)
-    setLikes(likes + 1)
-    fetch(API._url + '/flows/trigger/5ac6dc1b-fc9b-4471-b452-b8f8100a6ccb', { method: "POST" })
-  }
+  const [copied, setCopied] = useState(false)
+  const [showPicker, setShowPicker] = useState<boolean>(false)
+
+  const [stars, setStars] = useState<number>(0)
+  const [stargazers, setStargazers] = useState<any>([])
 
   const borderHover = {
     in: (obj: any) => {
@@ -37,12 +32,6 @@ export default function Index({ API, buildId }: { API: any, buildId: string }) {
 
   useEffect(() => {
     !hex.startsWith('#') && setHex('#' + hex)
-
-    if (window.localStorage.getItem('liked')) setLiked(true)
-    fetch(API._url + '/flows/trigger/fca1360c-9520-4d24-841f-9e2dc866b83a')
-      .then(raw => {
-        raw.json().then(res => setLikes(res.kudos))
-      })
 
     setContent(`
 #app, #main-content, body {
@@ -66,7 +55,19 @@ export default function Index({ API, buildId }: { API: any, buildId: string }) {
   --sidebar-detail-color-active: ${shade(hex, -0.10)} !important;
 }
     `.trim())
-  }, [hex, API._url])
+  }, [hex])
+
+  useEffect(() => {
+    fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder')
+      .then((raw: any) =>
+        raw.json()
+          .then((res: any) => setStars(res.stargazers_count)))
+
+    fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers')
+      .then((raw: any) =>
+        raw.json()
+          .then((res: any) => setStargazers(res)))
+  }, [])
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -104,16 +105,16 @@ export default function Index({ API, buildId }: { API: any, buildId: string }) {
 
             <input placeholder='#6644FF' value={hex} onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)} onChange={({ target }) => { setHex(target.value.trim()) }} style={{ color: hex }} className="p-4 font-semibold border-2 outline-0 border-neutral-300 rounded-lg w-full hover:border-violet-500 hover:border-3" />
 
-            <div onClick={like} className={liked ? 'rounded-lg px-6 py-4 text-white flex gap-3 text-xl items-center' : 'border-neutral-300 border-2 items-center rounded-lg flex gap-3 text-xl px-6 py-4 hover:cursor-pointer hover:border-violet-500 hover:border-3'} style={liked ? { backgroundColor: hex } : {}} onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
-              <BiLike className='pointer-events-none' />
-              <p className='pointer-events-none'>{likes}</p>
-            </div>
+            <a href="https://github.com/ThijmenGThN/directus-themebuilder/stargazers" target="_blank" rel="noreferrer" className='bg-white border-neutral-300 border-2 items-center rounded-lg flex gap-3 text-xl px-6 py-4 hover:cursor-pointer hover:border-violet-500 hover:border-3' onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
+              <BiStar className='pointer-events-none' />
+              <p className='pointer-events-none'>{stars}</p>
+            </a>
           </div>
         </div>
 
         <div className='mt-10 flex flex-col gap-2'>
           <p className='font-semibold'>Custom CSS</p>
-          <div className='flex min-h-[502px] relative rounded border-2 border-neutral-300 hover:border-3' onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
+          <div className='flex min-h-[502px] relative overflow-hidden rounded-lg border-2 border-neutral-300 hover:border-3' onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
             <div className='bg-slate-100 w-14 border-r-2 pointer-events-none'></div>
             <textarea readOnly className='w-full font-semibold outline-0 resize-none p-2 pointer-events-none' style={{ color: hex }} value={content} />
             {
@@ -129,6 +130,20 @@ export default function Index({ API, buildId }: { API: any, buildId: string }) {
             }
           </div>
         </div>
+
+        <div className='mt-10 flex flex-col gap-2'>
+          <p className='font-semibold'>Stargazers</p>
+          <div className='grid grid-cols-3 gap-2' onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
+            {
+              stargazers.map((gazer: any, index: number) => (
+                <a key={index} href={gazer.html_url} target="_blank" rel="noreferrer" className='flex rounded-lg items-center gap-4 border-2 p-4 border-neutral-300 hover:border-3'>
+                  <img className='pointer-events-none aspect-square w-10 rounded-full' src={gazer.avatar_url} alt="avatar" />
+                  <p className='pointer-events-none font-semibold'>@{gazer.login}</p>
+                </a>
+              ))
+            }
+          </div>
+        </div>
       </div>
 
       <div className='w-full bg-slate-200'>
@@ -141,8 +156,11 @@ export default function Index({ API, buildId }: { API: any, buildId: string }) {
             Theme Builder
           </a>
 
-          <a className='rounded-lg hover:bg-slate-300 p-4 my-2 text-xl items-center gap-2 hover:cursor-pointer flex' rel="noreferrer" target="_blank" href="https://github.com/ThijmenGThN/directus-themebuilder">
-            <p className='text-xs font-mono'>{buildId}</p>
+          <a className='rounded-lg hover:bg-slate-300 px-4 my-2 text-xl items-center gap-2 hover:cursor-pointer flex' rel="noreferrer" target="_blank" href="https://github.com/ThijmenGThN/directus-themebuilder">
+            <div className='text-xs font-mono flex flex-col text-right mr-1'>
+              <p>{latestTag}</p>
+              <p style={{ color: hex }}>{buildId}</p>
+            </div>
             <RiGitRepositoryFill />
           </a>
           <a className='rounded-lg hover:bg-slate-300 p-4 my-2 text-xl hover:cursor-pointer' rel="noreferrer" target="_blank" href="https://paypal.me/ThijmenGThN">
@@ -150,14 +168,15 @@ export default function Index({ API, buildId }: { API: any, buildId: string }) {
           </a>
         </div>
       </div>
-    </div >
+    </div>
   )
 }
 
 export async function getServerSideProps() {
   return {
     props: {
-      buildId: execSync('git rev-parse --short HEAD').toString()
+      buildId: execSync('git rev-parse --short HEAD').toString(),
+      latestTag: execSync('git describe --abbrev=0 --tags').toString()
     }
   }
 }
