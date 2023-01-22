@@ -11,7 +11,7 @@ services:
     env_file: .env
     volumes: [.:/usr/app]
     command: ["yarn", "ci"]
-    profiles: ["prod"]
+    profiles: ["app", "prod"]
 
   # v -- Directus | Backend CMS solution, accessible via API.
   endpoint:
@@ -35,6 +35,7 @@ services:
     volumes:
       - ./data/uploads:/directus/uploads
       - ./source/extensions:/directus/extensions
+    profiles: ["dev", "prod"]
 
   # v -- Postgres | Data storage as required by Directus.
   database:
@@ -47,6 +48,7 @@ services:
       POSTGRES_PASSWORD: $SECRET
       RATE_LIMITER_ENABLED: true
     volumes: [./data/database:/var/lib/postgresql/data]
+    profiles: ["dev", "prod"]
 
 networks:
   endpoint:
