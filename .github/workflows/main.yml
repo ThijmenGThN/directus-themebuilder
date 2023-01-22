@@ -1,0 +1,20 @@
+
+name: CI/CD
+
+on:
+  push:
+    branches: main
+
+jobs:
+  Deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.DEPLOY_KEY }}
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          script: |
+            cd ~/env/${{ github.event.repository.name }} ; git pull
+            docker-compose down ; docker-compose up -d --build
