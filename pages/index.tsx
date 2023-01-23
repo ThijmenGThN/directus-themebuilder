@@ -95,7 +95,7 @@ export default function Index({ buildId, latestTag }: { buildId: string, latestT
 
         <div className='mt-10 flex flex-col gap-2'>
           <p className='font-semibold'>Stargazers</p>
-          <div className='grid grid-cols-3 gap-2' onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2' onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
             {
               stargazers.map((gazer: any, index: number) => (
                 <a key={index} href={gazer.html_url} target="_blank" rel="noreferrer" className='flex rounded-lg items-center gap-4 border-2 p-4 border-neutral-300 hover:border-3'>
