@@ -45,38 +45,63 @@ export default function Index({ git }: any) {
   return (
     <div className='flex flex-col min-h-screen'>
       <div className="container mx-auto px-5 grow mb-10">
+        {/* ----- SECTION: Interface ----- */}
         <Splash hex={hex} />
-
         <div className='mt-10 flex flex-col gap-2'>
           <p className='font-semibold'>
             Hex Color
           </p>
 
           <div className='flex gap-2'>
-            <div onClick={() => setShowPicker(true)} onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)} className='border-neutral-300 border-2 rounded-lg relative hover:cursor-pointer hover:border-violet-500 hover:border-3'>
-              {showPicker && (
-                <SketchPicker className="absolute z-10" color={hex} onChangeComplete={(color: any) => { setHex(color.hex); setShowPicker(false) }} />
-              )}
+            <div className='border-neutral-300 border-2 rounded-lg relative hover:cursor-pointer hover:border-violet-500 hover:border-3'
+              onClick={() => setShowPicker(true)}
+              onMouseOver={({ target }) => borderHover.in(target)}
+              onMouseOut={({ target }) => borderHover.out(target)}
+            >
+              {
+                showPicker && (
+                  <SketchPicker className="absolute z-10"
+                    onChangeComplete={(color: any) => { setHex(color.hex); setShowPicker(false) }}
+                    color={hex}
+                  />
+                )
+              }
               <div className='m-3 w-9 h-9 rounded pointer-events-none' style={{ backgroundColor: hex }} />
             </div>
 
-            <input placeholder='#6644FF' value={hex} onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)} onChange={({ target }) => { setHex(target.value.trim()) }} style={{ color: hex }} className="p-4 font-semibold border-2 outline-0 border-neutral-300 rounded-lg w-full hover:border-violet-500 hover:border-3" />
+            <input placeholder='#6644FF' value={hex}
+              className="p-4 font-semibold border-2 outline-0 border-neutral-300 rounded-lg w-full hover:border-violet-500 hover:border-3"
+              onMouseOver={({ target }) => borderHover.in(target)}
+              onMouseOut={({ target }) => borderHover.out(target)}
+              onChange={({ target }) => { setHex(target.value.trim()) }} style={{ color: hex }}
+            />
 
-            <a href="https://github.com/ThijmenGThN/directus-themebuilder/stargazers" target="_blank" rel="noreferrer" className='bg-white border-neutral-300 border-2 items-center rounded-lg flex gap-3 text-xl px-6 py-4 hover:cursor-pointer hover:border-violet-500 hover:border-3' onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
+            <a href="https://github.com/ThijmenGThN/directus-themebuilder/stargazers" target="_blank" rel="noreferrer"
+              className='bg-white border-neutral-300 border-2 items-center rounded-lg flex gap-3 text-xl px-6 py-4 hover:cursor-pointer hover:border-violet-500 hover:border-3'
+              onMouseOver={({ target }) => borderHover.in(target)}
+              onMouseOut={({ target }) => borderHover.out(target)}
+            >
               <BiStar className='pointer-events-none' />
               <p className='pointer-events-none'>{stars}</p>
             </a>
           </div>
         </div>
 
+        {/* ----- SECTION: Custom CSS ----- */}
         <Content hex={hex} content={content} />
 
+        {/* ----- SECTION: Stargazers ----- */}
         <div className='mt-10 flex flex-col gap-2'>
           <p className='font-semibold'>Stargazers</p>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2' onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'
+            onMouseOver={({ target }) => borderHover.in(target)}
+            onMouseOut={({ target }) => borderHover.out(target)}
+          >
             {
               stargazers.map((gazer: any, index: number) => (
-                <a key={index} href={gazer.html_url} target="_blank" rel="noreferrer" className='flex rounded-lg items-center gap-4 border-2 p-4 border-neutral-300 hover:border-3'>
+                <a className='flex rounded-lg items-center gap-4 border-2 p-4 border-neutral-300 hover:border-3'
+                  key={index} href={gazer.html_url} target="_blank" rel="noreferrer"
+                >
                   <img className='pointer-events-none aspect-square w-10 rounded-full' src={gazer.avatar_url} alt="avatar" />
                   <p className='pointer-events-none font-semibold'>@{gazer.login}</p>
                 </a>

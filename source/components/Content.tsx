@@ -7,6 +7,7 @@ import { FaCheck } from 'react-icons/fa'
 export default function Content({ content, hex }: { content: string, hex: string }) {
     const [copied, setCopied] = useState(false)
 
+    // Dynamically change the theme based on the hex.
     const borderHover = {
         in: (obj: any) => obj.style.borderColor = hex,
         out: (obj: any) => obj.style.borderColor = '#d4d4d4'
