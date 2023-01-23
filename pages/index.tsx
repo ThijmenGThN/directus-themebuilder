@@ -52,22 +52,23 @@ export default function Index({ git }: any) {
             Hex Color
           </p>
 
-          <div className='flex gap-2'>
-            <div className='border-neutral-300 border-2 rounded-lg relative hover:cursor-pointer hover:border-violet-500 hover:border-3'
-              onClick={() => setShowPicker(true)}
+          <div className='flex gap-2 relative'>
+            <div className='border-neutral-300 border-2 rounded-lg hover:cursor-pointer hover:border-violet-500 hover:border-3'
+              onClick={() => setShowPicker(!showPicker)}
               onMouseOver={({ target }) => borderHover.in(target)}
               onMouseOut={({ target }) => borderHover.out(target)}
             >
-              {
-                showPicker && (
-                  <SketchPicker className="absolute z-10"
-                    onChangeComplete={(color: any) => { setHex(color.hex); setShowPicker(false) }}
-                    color={hex}
-                  />
-                )
-              }
               <div className='m-3 w-9 h-9 rounded pointer-events-none' style={{ backgroundColor: hex }} />
             </div>
+
+            {
+              showPicker && (
+                <SketchPicker className="absolute z-10 top-16 mt-2"
+                  onChange={(color: any) => { setHex(color.hex) }}
+                  color={hex}
+                />
+              )
+            }
 
             <input placeholder='#6644FF' value={hex}
               className="p-4 font-semibold border-2 outline-0 border-neutral-300 rounded-lg w-full hover:border-violet-500 hover:border-3"
