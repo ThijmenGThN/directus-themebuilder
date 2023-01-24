@@ -74,7 +74,7 @@ export default function Index({ git }: any) {
         <Splash hex={hex} />
         <div className='mt-10 flex flex-col gap-2'>
           <p className='font-semibold'>
-            Hex Color { hexText }
+            Hex Color
           </p>
 
           <div className='flex gap-2 relative'>
