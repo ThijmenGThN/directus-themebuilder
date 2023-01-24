@@ -12,6 +12,7 @@ import Content from '@/components/Content'
 
 export default function Index({ git }: any) {
   const [hex, setHex] = useState('#6644FF')
+  const [hexText, setHexText] = useState('#6644FF')
   const [content, setContent] = useState('')
 
   // Interface element states.
@@ -30,6 +31,10 @@ export default function Index({ git }: any) {
   useEffect(() => {
     // Ensure hex starts with a "#".
     !hex.startsWith('#') && setHex('#' + hex)
+
+    // Ensures that any given hex color can be seen infront of a white background.
+    // -->> Implementation by https://github.com/vanling - Thanks!
+    setHexText(shade.contrast(hex, hex, '#000'))
 
     // Update the css object.
     setContent(shade.wrap(hex))
@@ -74,7 +79,7 @@ export default function Index({ git }: any) {
               className="p-4 font-semibold border-2 outline-0 border-neutral-300 rounded-lg w-full hover:border-violet-500 hover:border-3"
               onMouseOver={({ target }) => borderHover.in(target)}
               onMouseOut={({ target }) => borderHover.out(target)}
-              onChange={({ target }) => { setHex(target.value.trim()) }} style={{ color: hex }}
+              onChange={({ target }) => { setHex(target.value.trim()) }} style={{ color: hexText }}
             />
 
             <a href="https://github.com/ThijmenGThN/directus-themebuilder/stargazers" target="_blank" rel="noreferrer"
@@ -89,7 +94,7 @@ export default function Index({ git }: any) {
         </div>
 
         {/* ----- SECTION: Custom CSS ----- */}
-        <Content hex={hex} content={content} />
+        <Content hex={hex} hexText={hexText} content={content} />
 
         {/* ----- SECTION: Stargazers ----- */}
         <div className='mt-10 flex flex-col gap-2'>
