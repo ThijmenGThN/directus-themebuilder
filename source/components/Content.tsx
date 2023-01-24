@@ -4,7 +4,7 @@ import { BiCopy } from 'react-icons/bi'
 import { FaCheck } from 'react-icons/fa'
 
 
-export default function Content({ content, hex }: { content: string, hex: string }) {
+export default function Content({ content, hex, hexText }: { content: string, hex: string, hexText: string }) {
     const [copied, setCopied] = useState(false)
 
     // Dynamically change the theme based on the hex.
@@ -18,7 +18,7 @@ export default function Content({ content, hex }: { content: string, hex: string
             <p className='font-semibold'>Custom CSS</p>
             <div className='flex min-h-[502px] relative overflow-hidden rounded-lg border-2 border-neutral-300 hover:border-3' onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
                 <div className='bg-slate-100 w-14 border-r-2 pointer-events-none'></div>
-                <textarea readOnly className='w-full font-semibold outline-0 resize-none p-2 pointer-events-none' style={{ color: hex }} value={content} />
+                <textarea readOnly className='w-full font-semibold outline-0 resize-none p-2 pointer-events-none' style={{ color: hexText }} value={content} />
                 {
                     copied ? (
                         <button className='absolute top-4 right-4 bg-slate-100 p-3 hover:bg-slate-200 rounded m-1.5 border-2' style={{ color: hex, borderColor: hex }}>
