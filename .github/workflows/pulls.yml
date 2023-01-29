@@ -12,6 +12,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
+      - name: Install Deps
+        run: yarn
+
       - name: Code Linter
         uses: wearerequired/lint-action@v2
         with:
