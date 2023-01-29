@@ -22,6 +22,9 @@ export default function Index({ git }: any) {
   const [stars, setStars] = useState<number>(0)
   const [stargazers, setStargazers] = useState<any>([])
 
+  // Contributors states.
+  const [contributors, setContributors] = useState<any>([])
+
   // Dynamically change the theme based on the hex.
   const borderHover = {
     in: (obj: any) => obj.style.borderColor = hex,
@@ -44,7 +47,9 @@ export default function Index({ git }: any) {
     // Fetch stars from github repo.
     fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder').then((raw: any) => raw.json().then((res: any) => setStars(res.stargazers_count)))
     // Fetch stargazers from github repo.
-    fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers').then((raw: any) => raw.json().then((res: any) => setStargazers(res)))
+    fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers').then((raw: any) => raw.json().then((res: any) => setStargazers(res.reverse())))
+    // Fetch contributors from github repo.
+    fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/contributors').then((raw: any) => raw.json().then((res: any) => setContributors(res)))
   }, [])
 
   return (
@@ -96,16 +101,16 @@ export default function Index({ git }: any) {
         {/* ----- SECTION: Custom CSS ----- */}
         <Content hex={hex} hexText={hexText} content={content} />
 
-        {/* ----- SECTION: Stargazers ----- */}
+        {/* ----- SECTION: Contributors ----- */}
         <div className='mt-10 flex flex-col gap-2'>
-          <p className='font-semibold'>Stargazers</p>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'
+          <p className='font-semibold'>Contributors</p>
+          <div className='flex flex-wrap gap-2'
             onMouseOver={({ target }) => borderHover.in(target)}
             onMouseOut={({ target }) => borderHover.out(target)}
           >
             {
-              stargazers.map((gazer: any, index: number) => (
-                <a className='flex rounded-lg items-center gap-4 border-2 p-4 border-neutral-300 hover:border-3'
+              contributors.map((gazer: any, index: number) => (
+                <a className='flex rounded-lg items-center gap-4 border-2 grow justify-center py-4 px-6 border-neutral-300 hover:border-3'
                   key={index} href={gazer.html_url} target="_blank" rel="noreferrer"
                 >
                   <img className='pointer-events-none aspect-square w-10 rounded-full' src={gazer.avatar_url} alt="avatar" />
@@ -115,10 +120,32 @@ export default function Index({ git }: any) {
             }
           </div>
         </div>
+
+        {/* ----- SECTION: Stargazers ----- */}
+        <div className='mt-10 flex flex-col gap-2 relative'>
+          <p className='font-semibold'>Stargazers</p>
+          <div className='flex flex-wrap gap-2 max-h-80 overflow-y-hidden'
+            onMouseOver={({ target }) => borderHover.in(target)}
+            onMouseOut={({ target }) => borderHover.out(target)}
+          >
+            {
+              stargazers.map((gazer: any, index: number) => (
+                <a className='flex rounded-lg items-center gap-4 border-2 grow justify-center py-4 px-6 border-neutral-300 hover:border-3'
+                  key={index} href={gazer.html_url} target="_blank" rel="noreferrer"
+                >
+                  <img className='pointer-events-none aspect-square w-10 rounded-full' src={gazer.avatar_url} alt="avatar" />
+                  <p className='pointer-events-none font-semibold'>@{gazer.login}</p>
+                </a>
+              ))
+            }
+          </div>
+
+          <div className='bg-gradient-to-b from-transparent pointer-events-none via-transparent absolute top-0 left-0 to-white h-full w-full' />
+        </div>
       </div>
 
       <Footer git={git} hex={hex} />
-    </div>
+    </div >
   )
 }
 
