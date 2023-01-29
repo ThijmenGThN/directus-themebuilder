@@ -12,7 +12,12 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Install Deps
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
         run: yarn
 
       - name: Code Linter
