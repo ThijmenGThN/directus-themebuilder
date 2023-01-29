@@ -18,7 +18,9 @@ jobs:
           node-version: '18.x'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: |
+          npm i -g yarn
+          yarn install --frozen-lockfile
 
       - name: Code Linter
         uses: wearerequired/lint-action@v2
