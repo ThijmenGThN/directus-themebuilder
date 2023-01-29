@@ -12,10 +12,13 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        uses: borales/actions-yarn@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          cmd: install
+          node-version: '18.x'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Code Linter
         uses: wearerequired/lint-action@v2
