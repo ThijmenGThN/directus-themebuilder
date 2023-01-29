@@ -12,13 +12,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Install Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 18
-
       - name: Install Dependencies
-        run: yarn
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
 
       - name: Code Linter
         uses: wearerequired/lint-action@v2
