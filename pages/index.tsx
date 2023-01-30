@@ -46,10 +46,20 @@ export default function Index({ git }: any) {
   useEffect(() => {
     // Fetch stars from github repo.
     fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder').then((raw: any) => raw.json().then((res: any) => setStars(res.stargazers_count)))
-    // Fetch stargazers from github repo.
-    fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers').then((raw: any) => raw.json().then((res: any) => setStargazers(res.reverse())))
     // Fetch contributors from github repo.
-    fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/contributors').then((raw: any) => raw.json().then((res: any) => setContributors(res)))
+    fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/contributors').then((raw: any) => raw.json().then((res: any) => {
+      setContributors(
+        res.filter(({ login }: { login: string }) => login != "ThijmenGThN") // Having this project as a repo of mine is enough credit for me :)
+      )
+    }))
+    // Fetch stargazers from github repo.
+    fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers').then((raw: any) => raw.json().then((res: any) => {
+      console.log(res)
+      setStargazers(
+        res.filter(({ login }: { login: string }) => login != "ThijmenGThN") // Having this project as a repo of mine is enough credit for me :)
+          .reverse()
+      )
+    }))
   }, [])
 
   return (
@@ -104,7 +114,7 @@ export default function Index({ git }: any) {
         {/* ----- SECTION: Contributors ----- */}
         <div className='mt-10 flex flex-col gap-2'>
           <p className='font-semibold'>Contributors</p>
-          <div className='flex flex-wrap gap-2'
+          <div className='flex flex-wrap gap-2 max-h-[512px] overflow-y-hidden'
             onMouseOver={({ target }) => borderHover.in(target)}
             onMouseOut={({ target }) => borderHover.out(target)}
           >
@@ -124,7 +134,7 @@ export default function Index({ git }: any) {
         {/* ----- SECTION: Stargazers ----- */}
         <div className='mt-10 flex flex-col gap-2 relative'>
           <p className='font-semibold'>Stargazers</p>
-          <div className='flex flex-wrap gap-2 max-h-80 overflow-y-hidden'
+          <div className='flex flex-wrap gap-2 max-h-[512px] overflow-y-hidden'
             onMouseOver={({ target }) => borderHover.in(target)}
             onMouseOut={({ target }) => borderHover.out(target)}
           >
