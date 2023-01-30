@@ -54,7 +54,6 @@ export default function Index({ git }: any) {
     }))
     // Fetch stargazers from github repo.
     fetch('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers').then((raw: any) => raw.json().then((res: any) => {
-      console.log(res)
       setStargazers(
         res.filter(({ login }: { login: string }) => login != "ThijmenGThN") // Having this project as a repo of mine is enough credit for me :)
           .reverse()
