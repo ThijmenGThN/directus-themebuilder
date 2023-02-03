@@ -16,8 +16,8 @@ export default function Index({ git, palette }: any) {
   const [hexText, setHexText] = useState('#6644FF')
   const [content, setContent] = useState('')
 
-  const [contributors, setContributors] = useState([])
-  const [stargazers, setStargazers] = useState([])
+  const [contributors, setContributors] = useState<Array<any>>([])
+  const [stargazers, setStargazers] = useState<Array<any>>([])
 
   // Dynamically change the theme based on the hex.
   const borderHover = {
@@ -38,31 +38,28 @@ export default function Index({ git, palette }: any) {
   }, [hex])
 
   useEffect(() => {
-    (async () => {
-      // Fetch and store people within the contributors group.
-      setContributors(
-        (
-          await axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/contributors')
-        )
-          // Prune repo owner from entries.
-          .data.filter(
-            ({ login }: { login: string }) => login != "ThijmenGThN"
-          )
-      )
+    // Fetch and store people within the contributors group.
+    axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/contributors')
+      .then((res: any) => {
+        // Prune repo owner from entries.
+        res = res.data.filter(
+          ({ login }: { login: string }) => login != "ThijmenGThN"
+        ).reverse()
 
-      // Fetch and store people within the stargazers group.
-      setStargazers(
-        (
-          await axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers')
-        )
-          // Prune repo owner from entries.
-          .data.filter(
-            ({ login }: { login: string }) => login != "ThijmenGThN"
-          ).reverse()
-      )
-    })()
+        setContributors(res)
+      })
 
-  }, [stargazers, contributors])
+    // Fetch and store people within the stargazers group.
+    axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers')
+      .then((res: any) => {
+        // Prune repo owner from entries.
+        res = res.data.filter(
+          ({ login }: { login: string }) => login != "ThijmenGThN"
+        ).reverse()
+
+        setStargazers(res)
+      })
+  }, [])
 
   return (
     <div className='flex flex-col min-h-screen'>
