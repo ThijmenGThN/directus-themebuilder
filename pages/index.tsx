@@ -56,7 +56,7 @@ export default function Index({ git, contributors, stargazers, palette }: any) {
           <div className='border-2 p-3 border-neutral-300 grid grid-flow-col gap-2 rounded-lg'>
             {
               palette.map((color: string, index: number) => (
-                <div className='rounded w-9 h-9 hover:cursor-pointer' style={{ backgroundColor: color }} onClick={() => setHex(color)} />
+                <div key={index} className='rounded w-9 h-9 hover:cursor-pointer' style={{ backgroundColor: color }} onClick={() => setHex(color)} />
               ))
             }
           </div>
