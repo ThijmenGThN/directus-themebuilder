@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react'
 import { execSync } from 'child_process'
 import axios from 'axios'
 
-import { BiStar } from 'react-icons/bi'
+import { BsStars } from 'react-icons/bs'
 
 import * as shade from '@/resources/shade'
 
 import Footer from '@/components/Footer'
 import Splash from '@/components/Splash'
 import Content from '@/components/Content'
+import People from '@/components/People'
 
-export default function Index({ git, contributors, stargazers }: any) {
+export default function Index({ git, contributors, stargazers, palette }: any) {
   const [hex, setHex] = useState('#6644FF')
   const [hexText, setHexText] = useState('#6644FF')
   const [content, setContent] = useState('')
@@ -36,77 +37,49 @@ export default function Index({ git, contributors, stargazers }: any) {
   return (
     <div className='flex flex-col min-h-screen'>
       <div className="container mx-auto flex flex-col px-5 grow mb-10">
-        {/* ----- SECTION: Interface ----- */}
+
+        {/* ----- SECTION: Logo with Motto ----- */}
         <Splash hex={hex} />
 
-        <div className='mt-10 flex flex-col gap-2 mx-auto'>
-          <p className='font-semibold'>
-            Color Palette
-          </p>
+        {/* ----- SECTION: Palette ----- */}
+        <div className='flex gap-2 mt-10 mx-auto'>
+          <div className='border-2 relative border-neutral-300 rounded-lg'>
+            <input className='absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer'
+              onChange={(({ target }) => setHex(target.value))}
+              value={hex}
+              type="color"
+            />
 
-          <div className='flex gap-2'>
-            <div className='border-2 border-neutral-300 rounded-lg overflow-hidden'>
-              <input type="color"
-                value={hex}
-                onChange={(({ target }) => console.log(target.value))}
-              />
-            </div>
-
-            <a href="https://github.com/ThijmenGThN/directus-themebuilder/stargazers" target="_blank" rel="noreferrer"
-              className='bg-white border-neutral-300 border-2 items-center rounded-lg flex gap-3 text-xl my-auto px-6 py-4 hover:cursor-pointer hover:border-violet-500 hover:border-3'
-              onMouseOver={({ target }) => borderHover.in(target)}
-              onMouseOut={({ target }) => borderHover.out(target)}
-            >
-              <BiStar className='pointer-events-none' />
-              <p className='pointer-events-none'>{stargazers.count}</p>
-            </a>
+            <div className='m-3 w-9 h-9 rounded pointer-events-none' style={{ backgroundColor: hex }} />
           </div>
+
+          <div className='border-2 p-3 border-neutral-300 grid grid-flow-col gap-2 rounded-lg'>
+            {
+              palette.map((color: string, index: number) => (
+                <div className='rounded w-9 h-9 hover:cursor-pointer' style={{ backgroundColor: color }} onClick={() => setHex(color)} />
+              ))
+            }
+          </div>
+
+          <a href="https://github.com/ThijmenGThN/directus-themebuilder/stargazers" target="_blank" rel="noreferrer"
+            className='bg-white border-neutral-300 border-2 items-center rounded-lg flex gap-1 text-xl my-auto p-4 hover:cursor-pointer hover:border-violet-500 hover:border-3'
+            onMouseOver={({ target }) => borderHover.in(target)}
+            onMouseOut={({ target }) => borderHover.out(target)}
+          >
+            <BsStars className='pointer-events-none' />
+            <p className='pointer-events-none font-semibold'>{stargazers.count}</p>
+          </a>
         </div>
 
         {/* ----- SECTION: Custom CSS ----- */}
         <Content hex={hex} hexText={hexText} content={content} />
 
         {/* ----- SECTION: Contributors ----- */}
-        <div className='mt-10 flex flex-col gap-2'>
-          <p className='font-semibold'>Contributors</p>
-          <div className='flex flex-wrap gap-2 max-h-[512px] overflow-y-hidden'
-            onMouseOver={({ target }) => borderHover.in(target)}
-            onMouseOut={({ target }) => borderHover.out(target)}
-          >
-            {
-              contributors.people.map((gazer: any, index: number) => (
-                <a className='flex rounded-lg items-center gap-4 border-2 grow justify-center py-4 px-6 border-neutral-300 hover:border-3'
-                  key={index} href={gazer.html_url} target="_blank" rel="noreferrer"
-                >
-                  <img className='pointer-events-none aspect-square w-10 rounded-full' src={gazer.avatar_url} alt="avatar" />
-                  <p className='pointer-events-none font-semibold'>@{gazer.login}</p>
-                </a>
-              ))
-            }
-          </div>
-        </div>
+        <People hex={hex} people={contributors.people} title="Contributors" />
 
         {/* ----- SECTION: Stargazers ----- */}
-        <div className='mt-10 flex flex-col gap-2 relative'>
-          <p className='font-semibold'>Stargazers</p>
-          <div className='flex flex-wrap gap-2 max-h-[512px] overflow-y-hidden'
-            onMouseOver={({ target }) => borderHover.in(target)}
-            onMouseOut={({ target }) => borderHover.out(target)}
-          >
-            {
-              stargazers.people.map((gazer: any, index: number) => (
-                <a className='flex rounded-lg items-center gap-4 border-2 grow justify-center py-4 px-6 border-neutral-300 hover:border-3'
-                  key={index} href={gazer.html_url} target="_blank" rel="noreferrer"
-                >
-                  <img className='pointer-events-none aspect-square w-10 rounded-full' src={gazer.avatar_url} alt="avatar" />
-                  <p className='pointer-events-none font-semibold'>@{gazer.login}</p>
-                </a>
-              ))
-            }
-          </div>
+        <People hex={hex} people={stargazers.people} title="Stargazers" />
 
-          <div className='bg-gradient-to-b from-transparent pointer-events-none via-transparent absolute top-0 left-0 to-white h-full w-full' />
-        </div>
       </div>
 
       <Footer git={git} hex={hex} />
@@ -119,7 +92,12 @@ export async function getServerSideProps() {
     git: {
       buildId: execSync('git rev-parse --short HEAD').toString(),
       latestTag: execSync('git describe --abbrev=0 --tags').toString()
-    }
+    },
+    palette: [
+      shade.random(),
+      shade.random(),
+      shade.random()
+    ]
   }
 
   try {
