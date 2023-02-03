@@ -11,10 +11,13 @@ import Splash from '@/components/Splash'
 import Content from '@/components/Content'
 import People from '@/components/People'
 
-export default function Index({ git, contributors, stargazers, palette }: any) {
+export default function Index({ git, palette }: any) {
   const [hex, setHex] = useState('#6644FF')
   const [hexText, setHexText] = useState('#6644FF')
   const [content, setContent] = useState('')
+
+  const [contributors, setContributors] = useState([])
+  const [stargazers, setStargazers] = useState([])
 
   // Dynamically change the theme based on the hex.
   const borderHover = {
@@ -33,6 +36,33 @@ export default function Index({ git, contributors, stargazers, palette }: any) {
     // Update the css object.
     setContent(shade.wrap(hex))
   }, [hex])
+
+  useEffect(() => {
+    (async () => {
+      // Fetch and store people within the contributors group.
+      setContributors(
+        (
+          await axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/contributors')
+        )
+          // Prune repo owner from entries.
+          .data.filter(
+            ({ login }: { login: string }) => login != "ThijmenGThN"
+          )
+      )
+
+      // Fetch and store people within the stargazers group.
+      setStargazers(
+        (
+          await axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers')
+        )
+          // Prune repo owner from entries.
+          .data.filter(
+            ({ login }: { login: string }) => login != "ThijmenGThN"
+          ).reverse()
+      )
+    })()
+
+  }, [stargazers, contributors])
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -67,7 +97,7 @@ export default function Index({ git, contributors, stargazers, palette }: any) {
             onMouseOut={({ target }) => borderHover.out(target)}
           >
             <BsStars className='pointer-events-none' />
-            <p className='pointer-events-none font-semibold'>{stargazers.count}</p>
+            <p className='pointer-events-none font-semibold'>{stargazers.length + 1}</p>
           </a>
         </div>
 
@@ -75,10 +105,10 @@ export default function Index({ git, contributors, stargazers, palette }: any) {
         <Content hex={hex} hexText={hexText} content={content} />
 
         {/* ----- SECTION: Contributors ----- */}
-        <People hex={hex} people={contributors.people} title="Contributors" />
+        <People hex={hex} people={contributors} title="Contributors" />
 
         {/* ----- SECTION: Stargazers ----- */}
-        <People hex={hex} people={stargazers.people} title="Stargazers" />
+        <People hex={hex} people={stargazers} title="Stargazers" />
 
       </div>
 
@@ -88,37 +118,17 @@ export default function Index({ git, contributors, stargazers, palette }: any) {
 }
 
 export async function getServerSideProps() {
-  let props: any = {
-    git: {
-      buildId: execSync('git rev-parse --short HEAD').toString(),
-      latestTag: execSync('git describe --abbrev=0 --tags').toString()
-    },
-    palette: [
-      shade.random(),
-      shade.random(),
-      shade.random()
-    ]
-  }
-
-  try {
-    props['contributors'] = {
-      people: (await axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/contributors')).data.filter(({ login }: { login: string }) => login != "ThijmenGThN")
-    }
-
-    props['stargazers'] = {
-      count: (await axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder')).data.stargazers_count,
-      people: (await axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers')).data.filter(({ login }: { login: string }) => login != "ThijmenGThN").reverse()
-    }
-  } catch (error) {
-    props['contributors'] = {
-      people: [{ avatar_url: '/defaults/user.png', login: ' Failed to load..' }]
-    }
-
-    props['stargazers'] = {
-      count: 0,
-      people: [{ avatar_url: '/defaults/user.png', login: ' Failed to load..' }]
+  return {
+    props: {
+      git: {
+        buildId: execSync('git rev-parse --short HEAD').toString(),
+        latestTag: execSync('git describe --abbrev=0 --tags').toString()
+      },
+      palette: [
+        shade.random(),
+        shade.random(),
+        shade.random()
+      ]
     }
   }
-
-  return { props }
 }
