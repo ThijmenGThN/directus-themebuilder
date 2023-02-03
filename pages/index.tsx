@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { execSync } from 'child_process'
 import axios from 'axios'
 
-import { BsStars } from 'react-icons/bs'
+import { BsPlusLg, BsStars } from 'react-icons/bs'
 
 import * as shade from '@/resources/shade'
 
@@ -16,8 +16,8 @@ export default function Index({ git, palette }: any) {
   const [hexText, setHexText] = useState('#6644FF')
   const [content, setContent] = useState('')
 
-  const [contributors, setContributors] = useState([])
-  const [stargazers, setStargazers] = useState([])
+  const [contributors, setContributors] = useState<Array<any>>([])
+  const [stargazers, setStargazers] = useState<Array<any>>([])
 
   // Dynamically change the theme based on the hex.
   const borderHover = {
@@ -38,31 +38,28 @@ export default function Index({ git, palette }: any) {
   }, [hex])
 
   useEffect(() => {
-    (async () => {
-      // Fetch and store people within the contributors group.
-      setContributors(
-        (
-          await axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/contributors')
-        )
-          // Prune repo owner from entries.
-          .data.filter(
-            ({ login }: { login: string }) => login != "ThijmenGThN"
-          )
-      )
+    // Fetch and store people within the contributors group.
+    axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/contributors')
+      .then((res: any) => {
+        // Prune repo owner from entries.
+        res = res.data.filter(
+          ({ login }: { login: string }) => login != "ThijmenGThN"
+        ).reverse()
 
-      // Fetch and store people within the stargazers group.
-      setStargazers(
-        (
-          await axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers')
-        )
-          // Prune repo owner from entries.
-          .data.filter(
-            ({ login }: { login: string }) => login != "ThijmenGThN"
-          ).reverse()
-      )
-    })()
+        setContributors(res)
+      })
 
-  }, [stargazers, contributors])
+    // Fetch and store people within the stargazers group.
+    axios.get('https://api.github.com/repos/ThijmenGThN/directus-themebuilder/stargazers')
+      .then((res: any) => {
+        // Prune repo owner from entries.
+        res = res.data.filter(
+          ({ login }: { login: string }) => login != "ThijmenGThN"
+        ).reverse()
+
+        setStargazers(res)
+      })
+  }, [])
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -73,20 +70,32 @@ export default function Index({ git, palette }: any) {
 
         {/* ----- SECTION: Palette ----- */}
         <div className='flex gap-2 mt-10 mx-auto'>
-          <div className='border-2 relative border-neutral-300 rounded-lg'>
+          <div id="palette-picker" className='border-2 relative border-neutral-300 rounded-lg'>
             <input className='absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer'
               onChange={(({ target }) => setHex(target.value))}
               value={hex}
               type="color"
+              onMouseOver={() => borderHover.in(document.querySelector('#palette-picker'))}
+              onMouseOut={() => borderHover.out(document.querySelector('#palette-picker'))}
             />
 
             <div className='m-3 w-9 h-9 rounded pointer-events-none' style={{ backgroundColor: hex }} />
           </div>
 
-          <div className='border-2 p-3 border-neutral-300 grid grid-flow-col gap-2 rounded-lg'>
+          <div id="palette-prefabs" className='border-2 p-3 border-neutral-300 grid grid-flow-col gap-2 rounded-lg'
+            onMouseOver={({ target }) => borderHover.in(target)}
+            onMouseOut={({ target }) => borderHover.out(target)}
+          >
             {
-              palette.map((color: string, index: number) => (
-                <div key={index} className='rounded w-9 h-9 hover:cursor-pointer' style={{ backgroundColor: color }} onClick={() => setHex(color)} />
+              [shade.random(), shade.random(), shade.random()].map((color: string, index: number) => (
+                <div key={index} className='rounded w-9 h-9 hover:cursor-pointer flex justify-center items-center text-white'
+                  style={{ backgroundColor: color }}
+                  onClick={() => setHex(color)}
+                  onMouseOver={() => borderHover.in(document.querySelector('#palette-prefabs'))}
+                  onMouseOut={() => borderHover.out(document.querySelector('#palette-prefabs'))}
+                >
+                  <BsPlusLg />
+                </div>
               ))
             }
           </div>
@@ -123,12 +132,7 @@ export async function getServerSideProps() {
       git: {
         buildId: execSync('git rev-parse --short HEAD').toString(),
         latestTag: execSync('git describe --abbrev=0 --tags').toString()
-      },
-      palette: [
-        shade.random(),
-        shade.random(),
-        shade.random()
-      ]
+      }
     }
   }
 }
