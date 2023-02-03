@@ -48,3 +48,11 @@ export const contrast = (bgColor: any, lightColor: any, darkColor: any) => {
   let L = (0.2126 * c[0]) + (0.7152 * c[1]) + (0.0722 * c[2])
   return (L > 0.179) ? darkColor : lightColor
 }
+
+// Returns a random shade (color) in HEX.
+export const random = () => {
+  const r = Math.floor(Math.random() * 128) + 64
+  const g = Math.floor(Math.random() * 128) + 64
+  const b = Math.floor(Math.random() * 128) + 64
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
+}

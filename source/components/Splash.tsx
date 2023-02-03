@@ -18,7 +18,7 @@ export default function Splash({ hex }: { hex: string }) {
                 </svg>
             </div>
             Theme Builder
-            <p className='text-sm italic text-neutral-400 font-mono'>Transform Directus with a splash of color<br />- made simple for you</p>
+            <p className='text-sm italic text-neutral-400 font-mono max-w-[300px]'>Transform Directus with a splash of color, streamlined for effortless use.</p>
         </div>
     )
 }
