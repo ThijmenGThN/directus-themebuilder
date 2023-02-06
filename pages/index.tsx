@@ -11,11 +11,12 @@ import Splash from '@/components/Splash'
 import Content from '@/components/Content'
 import People from '@/components/People'
 
-export default function Index({ git, palette }: any) {
+export default function Index({ git }: any) {
   const [hex, setHex] = useState('#6644FF')
   const [hexText, setHexText] = useState('#6644FF')
   const [content, setContent] = useState('')
   const [showPickerNotice, setShowPickerNotice] = useState<boolean>(true)
+  const [palette, setPalette] = useState([shade.random(), shade.random(), shade.random()])
 
   const [contributors, setContributors] = useState<Array<any>>([])
   const [stargazers, setStargazers] = useState<Array<any>>([])
@@ -99,10 +100,10 @@ export default function Index({ git, palette }: any) {
             onMouseOut={({ target }) => borderHover.out(target)}
           >
             {
-              [shade.random(), shade.random(), shade.random()].map((color: string, index: number) => (
+              palette.map((color: string, index: number) => (
                 <div key={index} className='rounded w-9 h-9 hover:cursor-pointer flex justify-center items-center text-white'
                   style={{ backgroundColor: color }}
-                  onClick={() => setHex(color)}
+                  onClick={() => { setHex(color); setPalette([shade.random(), shade.random(), shade.random()]) }}
                   onMouseOver={() => borderHover.in(document.querySelector('#palette-prefabs'))}
                   onMouseOut={() => borderHover.out(document.querySelector('#palette-prefabs'))}
                 >
