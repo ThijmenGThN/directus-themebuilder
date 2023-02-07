@@ -1,5 +1,4 @@
-import { RiPaypalFill, RiGitRepositoryFill } from 'react-icons/ri'
-import { BiCopyright } from 'react-icons/bi'
+import { RiPaypalFill, RiGitRepositoryFill, RiCopyrightFill } from 'react-icons/ri'
 
 export default function Footer({ git, hex }: { git: any, hex: string }) {
 
@@ -9,7 +8,7 @@ export default function Footer({ git, hex }: { git: any, hex: string }) {
                 <a className='gap-2 flex hover:cursor-pointer rounded-lg hover:bg-slate-300 my-2 mr-auto p-4' href="mailto:themebuilder@thijmenheuvelink.nl">
                     {new Date().getFullYear()}
                     <div className='mt-[3px]'>
-                        <BiCopyright />
+                        <RiCopyrightFill />
                     </div>
                     Theme Builder
                 </a>
