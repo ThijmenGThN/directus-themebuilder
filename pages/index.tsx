@@ -73,7 +73,7 @@ export default function Index({ git }: any) {
         {/* ----- SECTION: Palette ----- */}
         <div className='flex gap-2 mt-10 mx-auto'>
           <div id="palette-picker" className='border-2 relative border-neutral-300 rounded-lg'>
-            <input className='absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer'
+            <input id="color-picker" className='absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer'
               onChange={(({ target }) => setHex(target.value))}
               value={hex}
               type="color"
