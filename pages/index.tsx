@@ -84,15 +84,13 @@ export default function Index({ git }: any) {
 
             <div className='m-3 w-9 h-9 rounded pointer-events-none' style={{ backgroundColor: hex }} />
 
-            {
-              showPickerNotice && (
-                <div className="absolute top-[-1.85rem] z-0 left-6 w-40 h-6  p-0.5 rounded" style={{ backgroundColor: hexText }}>
-                  <p className='italic text-center text-white text-sm font-mono'>use your own color</p>
-                  <div className='absolute -z-10 -bottom-1.5 left-2 w-4 h-4 animate-ping rounded-full' style={{ backgroundColor: hexText }}></div>
-                  <div className='absolute -z-10 -bottom-1.5 left-2 w-4 h-4 rotate-45 rounded' style={{ backgroundColor: hexText }}></div>
-                </div>
-              )
-            }
+            <div className={"absolute top-[-1.85rem] z-0 left-6 w-40 h-6 p-0.5 rounded transition-all duration-500 opacity-0 " + (showPickerNotice && " opacity-100")}
+              style={{ backgroundColor: hexText }}
+            >
+              <p className='italic text-center text-white text-sm font-mono'>use your own color</p>
+              <div className='absolute -z-10 -bottom-1.5 left-2 w-4 h-4 animate-ping rounded-full' style={{ backgroundColor: hexText }}></div>
+              <div className='absolute -z-10 -bottom-1.5 left-2 w-4 h-4 rotate-45 rounded' style={{ backgroundColor: hexText }}></div>
+            </div>
           </div>
 
           <div id="palette-prefabs" className='border-2 p-3 border-neutral-300 grid grid-flow-col gap-2 rounded-lg'
