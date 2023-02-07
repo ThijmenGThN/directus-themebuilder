@@ -11,10 +11,12 @@ import Splash from '@/components/Splash'
 import Content from '@/components/Content'
 import People from '@/components/People'
 
-export default function Index({ git, palette }: any) {
+export default function Index({ git }: any) {
   const [hex, setHex] = useState('#6644FF')
   const [hexText, setHexText] = useState('#6644FF')
   const [content, setContent] = useState('')
+  const [showPickerNotice, setShowPickerNotice] = useState<boolean>(true)
+  const [palette, setPalette] = useState([shade.random(), shade.random(), shade.random()])
 
   const [contributors, setContributors] = useState<Array<any>>([])
   const [stargazers, setStargazers] = useState<Array<any>>([])
@@ -66,20 +68,31 @@ export default function Index({ git, palette }: any) {
       <div className="container mx-auto flex flex-col px-5 grow mb-10">
 
         {/* ----- SECTION: Logo with Motto ----- */}
-        <Splash hex={hex} />
+        <Splash hex={hexText} />
 
         {/* ----- SECTION: Palette ----- */}
         <div className='flex gap-2 mt-10 mx-auto'>
           <div id="palette-picker" className='border-2 relative border-neutral-300 rounded-lg'>
-            <input className='absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer'
+            <input id="color-picker" className='absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer'
               onChange={(({ target }) => setHex(target.value))}
               value={hex}
               type="color"
+              onClick={() => setShowPickerNotice(false)}
               onMouseOver={() => borderHover.in(document.querySelector('#palette-picker'))}
               onMouseOut={() => borderHover.out(document.querySelector('#palette-picker'))}
             />
 
             <div className='m-3 w-9 h-9 rounded pointer-events-none' style={{ backgroundColor: hex }} />
+
+            {
+              showPickerNotice && (
+                <div className="absolute top-[-1.85rem] z-0 left-6 w-40 h-6  p-0.5 rounded" style={{ backgroundColor: hexText }}>
+                  <p className='italic text-center text-white text-sm font-mono'>use your own color</p>
+                  <div className='absolute -z-10 -bottom-1.5 left-2 w-4 h-4 animate-ping rounded-full' style={{ backgroundColor: hexText }}></div>
+                  <div className='absolute -z-10 -bottom-1.5 left-2 w-4 h-4 rotate-45 rounded' style={{ backgroundColor: hexText }}></div>
+                </div>
+              )
+            }
           </div>
 
           <div id="palette-prefabs" className='border-2 p-3 border-neutral-300 grid grid-flow-col gap-2 rounded-lg'
@@ -87,10 +100,10 @@ export default function Index({ git, palette }: any) {
             onMouseOut={({ target }) => borderHover.out(target)}
           >
             {
-              [shade.random(), shade.random(), shade.random()].map((color: string, index: number) => (
+              palette.map((color: string, index: number) => (
                 <div key={index} className='rounded w-9 h-9 hover:cursor-pointer flex justify-center items-center text-white'
                   style={{ backgroundColor: color }}
-                  onClick={() => setHex(color)}
+                  onClick={() => { setHex(color); setPalette([shade.random(), shade.random(), shade.random()]) }}
                   onMouseOver={() => borderHover.in(document.querySelector('#palette-prefabs'))}
                   onMouseOut={() => borderHover.out(document.querySelector('#palette-prefabs'))}
                 >
