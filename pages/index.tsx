@@ -114,7 +114,7 @@ export default function Index({ git }: any) {
           </div>
 
           <a href="https://github.com/ThijmenGThN/directus-themebuilder/stargazers" target="_blank" rel="noreferrer"
-            className='bg-white border-neutral-300 border-2 items-center rounded-lg flex gap-1 text-xl my-auto p-4 hover:cursor-pointer hover:border-violet-500 hover:border-3'
+            className='bg-white border-neutral-300 border-2 items-center rounded-lg flex gap-1 text-xl my-auto p-4 hover:cursor-pointer hover:border-violet-500'
             onMouseOver={({ target }) => borderHover.in(target)}
             onMouseOut={({ target }) => borderHover.out(target)}
           >

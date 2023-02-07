@@ -15,7 +15,7 @@ export default function People({ hex, people, title }: { hex: string, people: an
             >
                 {
                     people.map((person: any, index: number) => (
-                        <a className='flex rounded-lg items-center gap-4 border-2 grow justify-center py-4 px-6 border-neutral-300 hover:border-3'
+                        <a className='flex rounded-lg items-center gap-4 border-2 grow justify-center py-4 px-6 border-neutral-300'
                             key={index} href={person.html_url} target="_blank" rel="noreferrer"
                         >
                             <img className='pointer-events-none aspect-square w-10 rounded-full' src={person.avatar_url} alt="avatar" />
