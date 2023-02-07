@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
-import { BiCopy } from 'react-icons/bi'
-import { FaCheck } from 'react-icons/fa'
-
+import { RiCheckboxCircleFill, RiClipboardFill } from 'react-icons/ri'
 
 export default function Content({ content, hex, hexText }: { content: string, hex: string, hexText: string }) {
     const [copied, setCopied] = useState(false)
@@ -13,23 +11,36 @@ export default function Content({ content, hex, hexText }: { content: string, he
         out: (obj: any) => obj.style.borderColor = '#d4d4d4'
     }
 
+    // Write Custom CSS to clipboard of client, also visualize it being copied.
+    const copy = () => {
+        setCopied(true)
+        navigator.clipboard.writeText(content)
+        setTimeout(() => setCopied(false), 2500)
+    }
+
     return (
         <div className='mt-10 flex flex-col gap-2'>
             <p className='font-semibold'>Custom CSS</p>
-            <div className='flex min-h-[502px] relative overflow-hidden rounded-lg border-2 border-neutral-300 hover:border-3' onMouseOver={({ target }) => borderHover.in(target)} onMouseOut={({ target }) => borderHover.out(target)}>
-                <div className='bg-slate-100 w-14 border-r-2 pointer-events-none'></div>
-                <textarea readOnly className='w-full font-semibold outline-0 resize-none p-2 pointer-events-none' style={{ color: hexText }} value={content} />
-                {
-                    copied ? (
-                        <button className='absolute top-4 right-4 bg-slate-100 p-3 hover:bg-slate-200 rounded m-1.5 border-2' style={{ color: hex, borderColor: hex }}>
-                            <FaCheck className="pointer-events-none" />
-                        </button>
-                    ) : (
-                        <button onClick={() => { navigator.clipboard.writeText(content); setCopied(true); setTimeout(() => setCopied(false), 2500) }} className='absolute top-4 right-4 bg-slate-100 p-3 rounded m-1.5 border-2 hover:bg-slate-200'>
-                            <BiCopy className="pointer-events-none" />
-                        </button>
-                    )
-                }
+
+            <div className='flex gap-4 p-4 rounded-lg border-2 border-neutral-300'
+                onMouseOver={({ target }) => borderHover.in(target)}
+                onMouseOut={({ target }) => borderHover.out(target)}
+            >
+                {/* ----- Sidebar ----- */}
+                <div className='flex flex-col gap-2'>
+                    <button className='bg-slate-100 p-4 text-xl flex justify-center aspect-square rounded border-2 items-center'
+                        style={copied ? ({ color: hex, borderColor: hex }) : undefined}
+                        onClick={copy}
+                    >
+                        {copied ? <RiCheckboxCircleFill className="pointer-events-none" /> : <RiClipboardFill className="pointer-events-none" />}
+                    </button>
+
+                    <div className='bg-slate-100 grow rounded' />
+                </div>
+
+                <p className='w-full font-semibold resize-none pointer-events-none whitespace-pre-wrap' style={{ color: hexText }}>
+                    {content}
+                </p>
             </div>
         </div>
     )

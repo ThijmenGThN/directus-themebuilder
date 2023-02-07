@@ -67,10 +67,10 @@ export default function Index({ git }: any) {
     <div className='flex flex-col min-h-screen'>
       <div className="container mx-auto flex flex-col px-5 grow mb-10">
 
-        {/* ----- SECTION: Logo with Motto ----- */}
+        {/* ----- Logo with Motto ----- */}
         <Splash hex={hexText} />
 
-        {/* ----- SECTION: Palette ----- */}
+        {/* ----- Palette ----- */}
         <div className='flex gap-2 mt-10 mx-auto'>
           <div id="palette-picker" className='border-2 relative border-neutral-300 rounded-lg'>
             <input id="color-picker" className='absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer'
@@ -114,7 +114,7 @@ export default function Index({ git }: any) {
           </div>
 
           <a href="https://github.com/ThijmenGThN/directus-themebuilder/stargazers" target="_blank" rel="noreferrer"
-            className='bg-white border-neutral-300 border-2 items-center rounded-lg flex gap-1 text-xl my-auto p-4 hover:cursor-pointer hover:border-violet-500 hover:border-3'
+            className='bg-white border-neutral-300 border-2 items-center rounded-lg flex gap-1 text-xl my-auto p-4 hover:cursor-pointer hover:border-violet-500'
             onMouseOver={({ target }) => borderHover.in(target)}
             onMouseOut={({ target }) => borderHover.out(target)}
           >
@@ -123,13 +123,13 @@ export default function Index({ git }: any) {
           </a>
         </div>
 
-        {/* ----- SECTION: Custom CSS ----- */}
+        {/* ----- Custom CSS ----- */}
         <Content hex={hex} hexText={hexText} content={content} />
 
-        {/* ----- SECTION: Contributors ----- */}
+        {/* ----- Contributors ----- */}
         <People hex={hex} people={contributors} title="Contributors" />
 
-        {/* ----- SECTION: Stargazers ----- */}
+        {/* ----- Stargazers ----- */}
         <People hex={hex} people={stargazers} title="Stargazers" />
 
       </div>
