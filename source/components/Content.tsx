@@ -11,7 +11,7 @@ export default function Content({ content, hex, hexText }: { content: string, he
         out: (obj: any) => obj.style.borderColor = '#d4d4d4'
     }
 
-    // Write Custom CSS to clipboard of client, also visualize it being copied.
+    // Write Custom CSS to clipboard of client, also visualizes it being copied.
     const copy = () => {
         setCopied(true)
         navigator.clipboard.writeText(content)
@@ -26,7 +26,7 @@ export default function Content({ content, hex, hexText }: { content: string, he
                 onMouseOver={({ target }) => borderHover.in(target)}
                 onMouseOut={({ target }) => borderHover.out(target)}
             >
-                {/* ----- Sidebar ----- */}
+                {/* ----- Toolbar (houses: clipboard) ----- */}
                 <div className='flex flex-col gap-2'>
                     <button className='bg-slate-100 p-4 text-xl flex justify-center aspect-square rounded border-2 items-center'
                         style={copied ? ({ color: hex, borderColor: hex }) : undefined}
