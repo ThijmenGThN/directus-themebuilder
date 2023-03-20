@@ -1,6 +1,11 @@
 import { RiPaypalFill, RiGitRepositoryFill, RiCopyrightFill } from 'react-icons/ri'
 
-export default function Footer({ git, hex }: { git: any, hex: string }) {
+interface GitData {
+    latestTag: string
+    buildId: string
+}
+
+export default function Footer({ git, hex }: { git: GitData, hex: string }) {
 
     return (
         <div className='w-full bg-slate-200'>

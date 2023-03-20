@@ -1,5 +1,11 @@
 
-export default function People({ hex, people, title }: { hex: string, people: any, title: string }) {
+interface Person {
+    login: string
+    html_url: string
+    avatar_url: string
+}
+
+export default function People({ hex, people, title }: { hex: string, people: Array<Person>, title: string }) {
     // Dynamically change the theme based on the hex.
     const borderHover = {
         in: (obj: any) => obj.style.borderColor = hex,
@@ -13,8 +19,9 @@ export default function People({ hex, people, title }: { hex: string, people: an
                 onMouseOver={({ target }) => borderHover.in(target)}
                 onMouseOut={({ target }) => borderHover.out(target)}
             >
+                {/* Iterates over supplied people, which is and must be an array. */}
                 {
-                    people.map((person: any, index: number) => (
+                    people.map((person: Person, index: number) => (
                         <a className='flex rounded-lg items-center gap-4 border-2 grow justify-center py-4 px-6 border-neutral-300'
                             key={index} href={person.html_url} target="_blank" rel="noreferrer"
                         >

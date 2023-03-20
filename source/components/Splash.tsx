@@ -4,6 +4,8 @@ export default function Splash({ hex }: { hex: string }) {
 
     return (
         <div className="flex flex-col gap-3 mt-8 items-center font-bold">
+
+            {/* Dynamic Directus Logo */}
             <div className='w-24 h-24 rounded-xl overflow-hidden relative'>
                 <svg viewBox="0 0 1152 1152">
                     <rect width="1152" height="1152" fill={shade.parse(hex, 0.20)}></rect>
@@ -17,9 +19,20 @@ export default function Splash({ hex }: { hex: string }) {
                     <path d="M52.7 25.24c-.31-.07-.56-.15-.8-.25-.16-.08-.3-.16-.42-.27a.32.32 0 01-.11-.28c.12-1.27-.01-2.4.1-3.65.51-5.12 3.73-3.5 6.62-4.33 1.65-.47 3.31-1.39 3.92-3.2.1-.3.01-.62-.2-.85a37.06 37.06 0 00-6.26-5.68A37.5 37.5 0 0028.93.37a.47.47 0 00-.34.72A14.02 14.02 0 0033 5.43c.32.2.19.63-.18.54a8.39 8.39 0 01-2.98-1.3.36.36 0 00-.34-.03l-1.69.68a.46.46 0 00-.12.78 14 14 0 0016.43 1.39c.32-.2.83.2.73.56-.17.57-.36 1.36-.56 2.43-1.3 6.53-5.02 6.03-9.63 4.38-9.2-3.34-14.43-.49-19.07-6.13-.33-.4-.9-.53-1.28-.2a4.36 4.36 0 00.44 6.97c.15.1.34.06.45-.07.29-.37.52-.6.82-.76.31-.16.47.3.2.53-.99.87-1.27 1.91-1.91 3.97-1.02 3.21-.59 6.5-5.32 7.36-2.5.13-2.46 1.83-3.37 4.36-1.06 3.06-2.44 4.4-5 7.08-.36.36-.39.95 0 1.28 1.02.87 2.08.92 3.15.48 2.66-1.12 4.71-4.56 6.64-6.79 2.15-2.48 7.31-1.42 11.21-3.85 2.1-1.29 3.37-2.94 2.97-5.4-.07-.4.39-.64.55-.27.31.7.52 1.44.6 2.2.03.21.2.36.41.35 4.22-.24 9.67 4.41 14.77 5.67.31.08.53-.28.36-.55a9.41 9.41 0 01-1.33-3.1c-.1-.39.48-.5.68-.14a9.42 9.42 0 007.56 4.84c1.24.1 2.6-.05 4.02-.48 1.7-.51 3.27-1.17 5.14-.81a5.3 5.3 0 013.5 2.15c1.13 1.66 3.53 2.1 4.81.36a.83.83 0 00.08-.82c-2.82-6.6-9.97-7.05-13.05-7.85z" fill="#fff"></path>
                 </svg>
             </div>
-            Theme Builder
+
+            <p>Theme Builder</p>
+
+            {/* Motto area with hyperlink to Directus */}
             <p className='text-sm italic text-neutral-400 font-mono max-w-[300px]'>
-                Transform <a href="https://directus.io" target="_blank" rel="noreferrer" style={{ color: hex }}>Directus</a> with a splash of color, streamlined for effortless use.</p>
+                Transform <a
+                    href="https://directus.io"
+                    style={{ color: hex }}
+                    rel="noreferrer"
+                    target="_blank"
+                >
+                    Directus
+                </a> with a splash of color, streamlined for effortless use.
+            </p>
         </div >
     )
 }
