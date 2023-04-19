@@ -3,7 +3,7 @@ name: deploy
 # ----- Rename "leaflet" to a valid branch -----
 on:
   push:
-    branches: leaflet
+    branches: main
 
 jobs:
   deploy:
