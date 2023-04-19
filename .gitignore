@@ -2,11 +2,15 @@
 # App
 /.next
 
-# Database
+# Endpoint
 /data
 
+# Testing
+**/cypress/screenshots/**
+!**/cypress/screenshots/Preview.png
+!**/cypress/screenshots/.keep
+
 # Generalized
-**/cypress/screenshots
 **/*.tsbuildinfo
 **/next-env.d.ts
 **/node_modules
