@@ -12,3 +12,38 @@ services:
     volumes: [.:/usr/app]
     command: ["yarn", "ci"]
     profiles: ["prod"]
+
+#   # v -- Directus | Backend CMS solution, accessible via API.
+#   endpoint:
+#     ports: [$ENDPOINT_PORT:8055]
+
+#     image: directus/directus:latest
+#     restart: unless-stopped
+#     networks: [endpoint]
+#     env_file: .env
+#     environment:
+#       CORS_ENABLED: "true"
+#       PUBLIC_URL: $CORS_ENDPOINT
+#       DB_CLIENT: "pg"
+#       DB_HOST: "database"
+#       DB_PORT: "5432"
+#       DB_DATABASE: "postgres"
+#       DB_USER: "postgres"
+#       DB_PASSWORD: $SECRET
+#     volumes:
+#       - ./data/uploads:/directus/uploads
+#       - ./source/extensions:/directus/extensions
+
+#   # v -- Postgres | Data storage as required by Directus.
+#   database:
+#     image: postgis/postgis:latest
+#     restart: unless-stopped
+#     depends_on: [endpoint]
+#     networks: [endpoint]
+#     env_file: .env
+#     environment:
+#       POSTGRES_PASSWORD: $SECRET
+#     volumes: [./data/database:/var/lib/postgresql/data]
+
+# networks:
+#   endpoint:

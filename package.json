@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "tsc --noemit && next lint",
-    "test": "./node_modules/.bin/cypress open --project source/tests",
-    "ci": "apk add git && yarn && yarn build && yarn start"
+    "ci": "yarn && yarn build && yarn start",
+    "test": "./node_modules/.bin/cypress open --project source/tests"
   },
   "dependencies": {
     "next": "13.0.3",
@@ -18,17 +18,16 @@
   },
   "devDependencies": {
     "@directus/sdk": "^10.3.1",
+    "@headlessui/react": "^1.7.14",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
-    "@types/react-color": "^3.0.6",
     "@types/react-dom": "18.0.8",
     "autoprefixer": "^10.4.13",
-    "axios": "^1.2.2",
     "cypress": "^12.2.0",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "postcss": "^8.4.19",
-    "react-icons": "^4.7.1",
+    "react-icons": "^4.6.0",
     "tailwindcss": "^3.2.4"
   }
 }

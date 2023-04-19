@@ -1,0 +1,29 @@
+name: deploy
+
+# ----- Rename "leaflet" to a valid branch -----
+on:
+  push:
+    branches: leaflet
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      # ----- Ensure all environment vars are configured -----
+      #          DEPLOY_ (KEY, HOST, USER, PORT, ENV)
+      - uses: appleboy/ssh-action@master
+        with:
+          key:      ${{ secrets.DEPLOY_KEY }} 
+          host:     ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          port:     ${{ secrets.DEPLOY_PORT }}
+          script: |
+            mkdir /root /root/env /root/env/${{ github.event.repository.name }}
+            cd ~/env/${{ github.event.repository.name }}
+
+            git clone https://github.com/${{github.repository}} .
+            git pull
+
+            echo '${{ secrets.DEPLOY_ENV }}' > .env
+            
+            docker-compose down ; docker-compose up -d
