@@ -31,7 +31,7 @@ export const wrap = (hex: string) => `
 
 // Ensures that any given hex color can be seen infront of a white background.
 // -->> Implementation by https://github.com/vanling - Thanks!
-export const contrast = (bgColor: any, lightColor: any, darkColor: any) => {
+export const contrast = (bgColor: string, lightColor: string, darkColor: string) => {
   const color = (bgColor.charAt(0) === '#') ? bgColor.substring(1, 7) : bgColor
 
   let r = parseInt(color.substring(0, 2), 16)
@@ -46,7 +46,7 @@ export const contrast = (bgColor: any, lightColor: any, darkColor: any) => {
   )
 
   let L = (0.2126 * c[0]) + (0.7152 * c[1]) + (0.0722 * c[2])
-  return (L > 0.179) ? darkColor : lightColor
+  return (L > 0.5) ? darkColor : lightColor
 }
 
 // Returns a random shade (color) in HEX.

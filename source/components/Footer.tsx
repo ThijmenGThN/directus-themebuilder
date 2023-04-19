@@ -72,7 +72,7 @@ export default function Footer() {
                     ))}
                 </div>
                 <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-                    &copy; 2023 Thijmen Heuvelink. All rights reserved.
+                    &copy; 2023 Thijmen Heuvelink, Open source - unlocking the potential of code.
                 </p>
             </div>
         </footer>

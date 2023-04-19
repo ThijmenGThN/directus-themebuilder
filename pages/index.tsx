@@ -1,4 +1,5 @@
 import Builder from '@/components/Builder'
+import Community from '@/components/Community'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 
@@ -26,8 +27,12 @@ export default function Page() {
           <div className="py-24 sm:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto max-w-2xl text-center">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                <h1 className="relative text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                   Theme Builder
+
+                  <p className="absolute top-0 -z-10 inline-flex items-center rounded-md bg-gray-200 px-2 py-1 font-medium text-gray-600 -mt-4 text-sm sm:-mt-3 sm:text-base">
+                    v2.0
+                  </p>
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
                   Transform Directus with a splash of color, streamlined for effortless use.
@@ -40,6 +45,8 @@ export default function Page() {
               </div>
 
               <Builder />
+
+              <Community />
             </div>
           </div>
 
