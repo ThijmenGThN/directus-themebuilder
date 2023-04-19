@@ -11,4 +11,3 @@
 > https://heuve.link/directus-themebuilder
 
 ![Preview](http://heuve.link/themebuilder-preview)
-I
