@@ -66,7 +66,7 @@ export default function Community() {
                                         <li key={person.login}>
                                             <a href={person.html_url} target="_blank" rel="noreferrer">
                                                 <img
-                                                    className="relative z-30 inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                                                    className="relative z-30 inline-block h-8 w-8 rounded-full ring-2 ring-white"
                                                     src={person.avatar_url}
                                                     alt=""
                                                 />
