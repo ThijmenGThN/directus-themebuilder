@@ -62,7 +62,7 @@ export default function Community() {
                                 </div>
 
                                 <ul className="flex isolate -space-x-2 overflow-hidden mt-6">
-                                    {stargazers.slice(0, 10).map((person) => (
+                                    {stargazers.slice(0, 8).map((person) => (
                                         <li key={person.login}>
                                             <a href={person.html_url} target="_blank" rel="noreferrer">
                                                 <img
@@ -77,7 +77,7 @@ export default function Community() {
 
                                 <div className='mt-6'>
                                     <a href="https://github.com/ThijmenGThN/directus-themebuilder" className="italic text-sm font-semibold leading-6 text-gray-900">
-                                        See {stargazers.length - 10} other people <span aria-hidden="true">&rarr;</span>
+                                        See {stargazers.length - 8} other people <span aria-hidden="true">&rarr;</span>
                                     </a>
                                 </div>
                             </div>
