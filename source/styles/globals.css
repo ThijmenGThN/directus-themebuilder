@@ -3,10 +3,65 @@
 @tailwind utilities;
 
 .scrollbar-none::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
 .scrollbar-none {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.copy__button {
+	background: #6644ff;
+	position: relative;
+	z-index: 1;
+	padding: 0.8em 2.3em;
+	font-size: 16px;
+	border: 10px solid #e0daff;
+	transition: all 0.2s;
+}
+
+.copy__button:hover {
+	border: 10px solid white;
+}
+
+.top .right__part svg {
+	filter: drop-shadow(0px 14px 44px rgba(29, 40, 50, 0.1));
+	z-index: 2;
+}
+.blur__tl {
+	top: 0;
+	right: 0;
+	width: 30cqw;
+	height: 30cqw;
+	border-radius: 50%;
+	filter: blur(112px);
+	transform: translate(10%, -50%);
+	opacity: 0.12;
+	background: black;
+	z-index: 0;
+}
+.blur__bl {
+	bottom: 0;
+	left: 30%;
+	width: 20cqw;
+	height: 20cqw;
+	border-radius: 50%;
+	filter: blur(112px);
+	transform: translate(0%, 0%);
+	opacity: 0.12;
+	background: black;
+	z-index: 0;
+}
+
+.blur__br {
+	bottom: 0;
+	right: 0;
+	width: 15cqw;
+	height: 15cqw;
+	border-radius: 50%;
+	filter: blur(112px);
+	opacity: 0.4;
+	background: black;
+	z-index: 0;
 }
