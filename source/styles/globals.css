@@ -17,12 +17,12 @@
 	z-index: 1;
 	padding: 0.8em 2.3em;
 	font-size: 16px;
-	border: 10px solid #e0daff;
+	border: 9px solid #e0daff;
 	transition: all 0.2s;
 }
 
 .copy__button:hover {
-	border: 10px solid white;
+	border: 9px solid white;
 }
 
 .top .right__part svg {
@@ -53,7 +53,6 @@
 	background: black;
 	z-index: 0;
 }
-
 .blur__br {
 	bottom: 0;
 	right: 0;

@@ -76,7 +76,7 @@ export default function Community() {
                                 </ul>
 
                                 <div className='mt-6'>
-                                    <a href="https://github.com/ThijmenGThN/directus-themebuilder" className="italic text-sm font-semibold leading-6 text-gray-900">
+                                    <a href="https://github.com/ThijmenGThN/directus-themebuilder" className="text-sm font-semibold leading-6 text-gray-900">
                                         See {stargazers.length - 8} other people <span aria-hidden="true">&rarr;</span>
                                     </a>
                                 </div>
