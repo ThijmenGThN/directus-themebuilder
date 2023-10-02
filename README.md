@@ -7,4 +7,4 @@ Customizing the Directus app with a specific color can be a hassle due to the ne
 
 **https://heuve.link/directus-themebuilder**
 
-![Preview]([http://heuve.link/themebuilder-preview](https://i.imgur.com/4f3tmIe.png)https://i.imgur.com/4f3tmIe.png)
+![Preview](https://i.imgur.com/TjqUTRp.png)
