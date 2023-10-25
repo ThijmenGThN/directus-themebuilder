@@ -1,24 +1,13 @@
 
-# next-leaflet
+### A Theme Builder for Directus
 
-An optimized tech stack for efficiency, an all-in-one solution to quickly build modern web apps.
+Customizing the Directus app with a specific color can be a hassle due to the need to convert the color to a CSS object. To simplify this process, a web application has been built that offers an easier way to apply a custom color using a color converter. The application eliminates the need to go through the tedious process of converting a single color and provides a more efficient solution. Try it out by clicking on the link below.
 
-<b>Looking for the [(directus)](https://github.com/ThijmenGThN/next-directus) branch?</b>
+> _**TLDR**: Easier way to apply a custom color with a webapp color converter._
 
-![preview](https://i.imgur.com/uNKXhM7.png)
+**https://heuve.link/directus-themebuilder**
 
-<b>For now; next-leaflet is deemed to be stable, but usage in a production environment is not suggested.</b>
-
-<b>Use at your own discretion!</b>
-
-# Features
-
-- User authorization [(nextauth)](https://next-auth.js.org/)
-    - Credentials
-    - OAuth2 [(providers)](https://next-auth.js.org/providers/)
-- Form validation [(zod)](https://zod.dev)
-- Emails [(react email)](https://react.email)
-- Server Actions
+![Preview](https://i.imgur.com/TjqUTRp.png)
 
 # Build with
 
