@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: leaflet # <- Rename to a valid branch.
+    branches: main
 
 jobs:
   deploy:
