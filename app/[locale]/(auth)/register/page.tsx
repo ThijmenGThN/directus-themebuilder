@@ -26,6 +26,10 @@ export default function Page() {
 
         if (status == 400) return new Error(t('the-provided-address-does-not-meet-the-criteria-of-an-email-address'))
         if (status == 403) return new Error(t('the-provided-email-address-is-already-taken'))
+
+        // Temp
+        if (status == 402) return new Error("Registration is disabled for now, soon you'll be able to upload your own themes!")
+
         if (!ok) return new Error(t('sorry-something-unexpected-happened'))
 
         setFormEmail(email)
