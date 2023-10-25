@@ -1,18 +1,21 @@
 
-# App
-/.next
+# ━━ Blacklist ━━
 
-# Endpoint
+*.pem
+*.tsbuildinfo
+*.log*
+.env*
+
+.DS_Store
+.react-email
+next-env.d.ts
 /data
+/out
+/build
+/.next
+/node_modules
 
-# Testing
-**/cypress/screenshots/**
-!**/cypress/screenshots/Preview.png
-!**/cypress/screenshots/.keep
 
-# Generalized
-**/*.tsbuildinfo
-**/next-env.d.ts
-**/node_modules
-**/.env*
-**/yarn*
+# ━━ Whitelist ━━
+
+!.env.sample

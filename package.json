@@ -1,33 +1,55 @@
 {
-  "name": "leaflet",
+  "name": "next-leaflet",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noemit && next lint",
-    "ci": "yarn && yarn build && yarn start",
-    "test": "./node_modules/.bin/cypress open --project source/tests"
+    "lint": "next lint",
+    "deploy": "yarn && npx prisma generate && npx prisma db push && yarn build && yarn start",
+    "update-next": "yarn add next@latest react@latest react-dom@latest eslint-config-next@latest",
+    "email-dev": "email dev --dir src/emails --port 4000"
   },
   "dependencies": {
-    "next": "13.0.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "4.8.4"
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
+    "@hookform/resolvers": "^3.1.1",
+    "@prisma/client": "^5.0.0",
+    "@react-email/components": "^0.0.7",
+    "@tailwindcss/forms": "^0.5.4",
+    "@types/bcrypt": "^5.0.0",
+    "@types/crypto-js": "^4.1.1",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/node": "20.4.2",
+    "@types/nodemailer": "^6.4.8",
+    "@types/react": "18.2.15",
+    "@types/react-dom": "18.2.7",
+    "autoprefixer": "10.4.14",
+    "bcrypt": "^5.1.0",
+    "crypto-js": "^4.1.1",
+    "eslint": "8.45.0",
+    "eslint-config-next": "^13.5.3",
+    "jsonwebtoken": "^9.0.1",
+    "next": "^13.5.3",
+    "next-auth": "^4.22.1",
+    "next-intl": "^2.20.2",
+    "nodemailer": "^6.9.4",
+    "postcss": "8.4.26",
+    "prisma": "^5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-email": "1.9.4",
+    "react-hook-form": "^7.45.2",
+    "sharp": "^0.32.4",
+    "tailwindcss": "3.3.3",
+    "ts-node": "^10.9.1",
+    "typescript": "5.1.6",
+    "zod": "^3.21.4"
   },
-  "devDependencies": {
-    "@directus/sdk": "^10.3.1",
-    "@headlessui/react": "^1.7.14",
-    "@types/node": "18.11.9",
-    "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.8",
-    "autoprefixer": "^10.4.13",
-    "cypress": "^12.2.0",
-    "eslint": "8.27.0",
-    "eslint-config-next": "13.0.3",
-    "postcss": "^8.4.19",
-    "react-icons": "^4.6.0",
-    "tailwindcss": "^3.2.4"
-  }
+  "prisma": {
+    "schema": "src/prisma/schema.prisma",
+    "seed": "ts-node src/prisma/seed.ts"
+  },
+  "devDependencies": {}
 }

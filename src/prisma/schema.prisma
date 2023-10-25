@@ -1,0 +1,43 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("PRISMA_CONNECTOR")
+}
+
+enum Roles {
+  USER
+  ADMIN
+}
+
+model User {
+  id String @id @default(cuid())
+
+  name  String
+  email String @unique
+  role  Roles  @default(USER)
+
+  apiTokens ApiToken[]
+
+  password           String?
+  passwordResetToken String?
+
+  createdOn DateTime @default(now())
+  updatedOn DateTime @updatedAt
+}
+
+model ApiToken {
+  id    String @id @default(uuid())
+  owner String
+
+  name  String
+  token String @unique
+
+  createdOn DateTime @default(now())
+  updatedOn DateTime @updatedAt
+
+  User User? @relation(fields: [owner], references: [email], onDelete: Cascade)
+}
