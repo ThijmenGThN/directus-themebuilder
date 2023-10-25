@@ -5,7 +5,7 @@ import createIntlMiddleware from 'next-intl/middleware'
 export const defaultLocale = 'en'
 export const locales = ['en', 'nl'] // Also reflect changes in → src/components/locale/Switcher
 
-const publicPages = ['/', '/login', '/register', '/forgot']
+const publicPages = ['/', '/login', '/register', '/forgot', '/legacy']
 
 const intlMiddleware = createIntlMiddleware({ locales, defaultLocale })
 

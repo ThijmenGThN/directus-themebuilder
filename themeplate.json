@@ -1,0 +1,102 @@
+{
+    "foreground": "",
+    "foregroundAccent": "",
+    "foregroundSubdued": "",
+    "background": "",
+    "primary": "",
+    "primaryBackground": "",
+    "primarySubdued": "",
+    "primaryAccent": "",
+    "secondary": "",
+    "secondaryBackground": "",
+    "secondarySubdued": "",
+    "secondaryAccent": "",
+    "success": "",
+    "successBackground": "",
+    "successSubdued": "",
+    "successAccent": "",
+    "warning": "",
+    "warningBackground": "",
+    "warningSubdued": "",
+    "warningAccent": "",
+    "danger": "",
+    "dangerBackground": "",
+    "dangerSubdued": "",
+    "dangerAccent": "",
+    "fontFamilyDisplay": "",
+    "fontFamilySansSerif": "",
+    "fontFamilySerif": "",
+    "fontFamilyMonospace": "",
+    "navigation": {
+        "background": "",
+        "project": {
+            "background": "",
+            "foreground": ""
+        },
+        "modules": {
+            "background": "",
+            "button": {
+                "foreground": "",
+                "foregroundHover": "",
+                "foregroundActive": "",
+                "background": "",
+                "backgroundHover": "",
+                "backgroundActive": ""
+            }
+        },
+        "list": {
+            "icon": {
+                "foreground": "",
+                "foregroundHover": "",
+                "foregroundActive": ""
+            },
+            "foreground": "",
+            "foregroundHover": "",
+            "foregroundActive": "",
+            "background": "",
+            "backgroundHover": "",
+            "backgroundActive": ""
+        }
+    },
+    "header": {
+        "background": "",
+        "headline": {
+            "foreground": ""
+        },
+        "title": {
+            "foreground": "",
+            "fontFamily": ""
+        }
+    },
+    "form": {
+        "field": {
+            "label": {
+                "foreground": ""
+            },
+            "input": {
+                "background": "",
+                "foreground": "",
+                "foregroundSubdued": ""
+            }
+        }
+    },
+    "sidebar": {
+        "background": "",
+        "foreground": "",
+        "section": {
+            "toggle": {
+                "icon": {
+                    "foreground": "",
+                    "foregroundHover": "",
+                    "foregroundActive": ""
+                },
+                "foreground": "",
+                "foregroundHover": "",
+                "foregroundActive": "",
+                "background": "",
+                "backgroundHover": "",
+                "backgroundActive": ""
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "primary": "#11999E",
+    "navigation": {
+        "modules": {
+            "background": "#e4eaf1",
+            "button": {
+                "foreground": "--theme-foreground",
+                "backgroundHover": "#0f888c"
+            }
+        }
+    }
+}

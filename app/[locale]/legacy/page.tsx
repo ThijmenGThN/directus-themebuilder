@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
+import Builder from './Builder'
 import Community from '@/components/common/Community'
 import Footer from '@/components/common/Footer'
 import Navbar from '@/components/common/Navbar'
@@ -44,7 +45,7 @@ export default function Page() {
                                 </div>
                             </div>
 
-                            {/* abc */}
+                            <Builder />
 
                             <Community />
                         </div>
