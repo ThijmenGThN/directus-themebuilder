@@ -22,7 +22,8 @@ export async function getApiToken({ req }: { req: NextRequest }) {
         return { name, owner, token }
     }
 
-    catch {
+    catch (error) {
+        console.error(error)
         return
     }
 

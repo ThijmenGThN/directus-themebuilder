@@ -43,7 +43,8 @@ export async function POST(req: NextRequest) {
         return NextResponse.json('We have sent you an email to complete your registration.', { status: 200 })
     }
 
-    catch {
+    catch (error) {
+        console.error(error)
         return NextResponse.json('Internal server error, try again later.', { status: 500 })
     }
 

@@ -26,7 +26,8 @@ export async function POST(req: NextRequest) {
         return NextResponse.json('Name of the user has succesfully been updated.', { status: 200 })
     }
 
-    catch {
+    catch (error) {
+        console.error(error)
         return NextResponse.json('Internal server error, try again later.', { status: 500 })
     }
 }

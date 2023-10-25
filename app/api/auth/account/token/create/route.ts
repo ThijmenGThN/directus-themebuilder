@@ -39,7 +39,8 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(jwt.sign({ name, owner: session.email, token }, process.env.NEXTAUTH_SECRET), { status: 200 })
     }
 
-    catch {
+    catch (error) {
+        console.error(error)
         return NextResponse.json('Internal server error, try again later.', { status: 500 })
     }
 }
