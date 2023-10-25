@@ -4,7 +4,7 @@ import * as shade from '@/helpers/shade'
 
 export default function Builder() {
     const [hex, setHex] = useState<string>('#6644ff')
-    const [palette, setPalette] = useState<Array<string>>([])
+    const [palette, setPalette] = useState<Array<string>>(['#d5d5d5', '#d5d5d5', '#d5d5d5', '#d5d5d5', '#d5d5d5', '#d5d5d5', '#d5d5d5', '#d5d5d5', '#d5d5d5', '#d5d5d5'])
     const [object, setObject] = useState<string>('')
     const [copied, setCopied] = useState<boolean>(false)
 
@@ -87,7 +87,7 @@ export default function Builder() {
 
                             <div className="p-2 bg-white rounded-lg w-full ring-1 ring-inset ring-gray-900/10">
                                 <p className='font-semibold whitespace-pre-wrap' style={{ color: shade.contrast(hex, hex, '#000') }}>
-                                    {object}
+                                    {object || "#app, #main-content, body {\n  --primary-alt: #f0ecff !important;\n  --primary-10: #f0ecff !important;\n  --primary-25: #d9d0ff !important;\n  --primary-50: #b3a2ff !important;\n  --primary-75: #8c73ff !important;\n  --primary-90: #7557ff !important;\n\n  --primary: #6644ff !important;\n\n  --primary-110: #5c3de6 !important;\n  --primary-125: #4d33bf !important;\n  --primary-150: #332280 !important;\n  --primary-175: #1a1140 !important;\n  --primary-190: #0a071a !important;\n\n  --v-button-background-color: #6644ff !important;\n  --v-button-background-color-hover: #5c3de6 !important;\n  --sidebar-detail-color-active: #5c3de6 !important;\n}"}
                                 </p>
                             </div>
                         </div>

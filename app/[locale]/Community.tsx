@@ -33,7 +33,7 @@ export default function Community() {
                                     </p>
                                 </div>
 
-                                <ul role="list" className="grid grid-cols-1 gap-4 mt-6 sm:grid-cols-2">
+                                <ul role="list" className="grid grid-cols-1 gap-4 mt-6 sm:grid-cols-2 h-10">
                                     {contributors.map((person) => (
                                         <li key={person.login}>
                                             <a href={person.html_url} target='_blank' rel="noreferrer">
@@ -60,7 +60,7 @@ export default function Community() {
                                     </p>
                                 </div>
 
-                                <ul className="flex isolate -space-x-2 overflow-hidden mt-6">
+                                <ul className="flex isolate -space-x-2 overflow-hidden mt-6 h-8">
                                     {stargazers.slice(0, 8).map((person) => (
                                         <li key={person.login}>
                                             <a href={person.html_url} target="_blank" rel="noreferrer">
