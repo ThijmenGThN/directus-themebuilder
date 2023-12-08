@@ -11,8 +11,8 @@ import '@/styles/globals.css'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'next-leaflet',
-    description: 'An optimized tech stack for efficiency.'
+    title: 'Theme Builder',
+    description: 'Transform Directus with a splash of color, streamlined for effortless use.'
 }
 
 const inter = Inter({ subsets: ['latin'] })
